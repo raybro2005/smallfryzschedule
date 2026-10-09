@@ -9,7 +9,13 @@ const OCCASIONS = {"2026-10-31":{icon:"🎃",label:"Halloween"},"2026-12-25":{ic
 const pad=n=>String(n).padStart(2,"0");
 const key=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const now=new Date();
-const todayKey=key(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate());
+let todayKey="";
+const VIEWER_TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||"your time zone"}catch(e){return "your time zone"}})();
+/* Which calendar day a moment falls on: the viewer's local date, or the UTC date when the UTC switch is on. */
+function dayKeyOf(date){return prefs.tz==="utc"
+  ?key(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate())
+  :key(date.getFullYear(),date.getMonth(),date.getDate())}
+function refreshToday(){const k=dayKeyOf(new Date());const changed=k!==todayKey;todayKey=k;return changed}
 const MONTHS=["january","february","march","april","may","june","july","august","september","october","november","december"];
 /* ===== security: validate + trim everything read from the store, escape everything rendered ===== */
 const RX_DATE=/^\d{4}-\d{2}-\d{2}$/, RX_TIME=/^([01]\d|2[0-3]):[0-5]\d$/, RX_TWITCH=/^[A-Za-z0-9_]{1,25}$/;
@@ -45,7 +51,11 @@ function cleanMeta(o){
 const twitchUrl=n=>"https://www.twitch.tv/"+encodeURIComponent(n.toLowerCase());
 
 let byDay={};
-function indexStreams(){byDay={};STREAMS.slice().sort((a,b)=>(a.d+(a.start||"99"))<(b.d+(b.start||"99"))?-1:1).forEach(s=>(byDay[s.d]=byDay[s.d]||[]).push(s))}
+function indexStreams(){
+  byDay={};
+  STREAMS.forEach(s=>{const t=startDate(s);s.k=t?dayKeyOf(t):s.d;s.sortAt=t?t.getTime():Date.parse(s.d+"T23:59:00Z")});
+  STREAMS.slice().sort((a,b)=>a.sortAt-b.sortAt).forEach(s=>(byDay[s.k]=byDay[s.k]||[]).push(s));
+}
 function eventsOn(k){return EVENTS.filter(e=>k>=e.from&&k<=e.to)}
 function startDate(s){return s.start?new Date(`${s.d}T${s.start}:00Z`):null}
 function isLive(s){const t=startDate(s);if(!t||s.dur||s.planned)return false;const h=(Date.now()-t)/36e5;return h>=0&&h<10}
@@ -70,7 +80,9 @@ function fmtTime(d){
 }
 
 /* ===== render ===== */
-let view={y:now.getUTCFullYear(),m:now.getUTCMonth()};
+refreshToday();
+function todayView(){const [y,m]=todayKey.split("-").map(Number);return {y,m:m-1}}
+let view=todayView();
 let selected=todayKey;
 const $=id=>document.getElementById(id);
 
@@ -168,8 +180,8 @@ function renderLive(){
   $("livechip").classList.toggle("on",!!live);
   if(live){$("livetext").textContent="Live now: "+live.title}
   else{
-    const next=STREAMS.filter(s=>s.planned&&s.d>=todayKey).sort((a,b)=>a.d<b.d?-1:1)[0];
-    $("livetext").textContent=loadState==="loading"?"Loading…":next?`Next: ${next.title}, ${fmtShort(next.d)}`:"Offline";
+    const next=STREAMS.filter(s=>s.planned&&(s.k||s.d)>=todayKey).sort((a,b)=>a.sortAt-b.sortAt)[0];
+    $("livetext").textContent=loadState==="loading"?"Loading…":next?`Next: ${next.title}, ${fmtShort(next.k||next.d)}`:"Offline";
   }
 }
 
@@ -190,8 +202,11 @@ function renderLive(){
 /* ===== live data ===== */
 function relTime(iso){const m=Math.round((Date.now()-new Date(iso))/6e4);if(m<1)return"just now";if(m<60)return m+" min ago";const h=Math.round(m/60);return h<48?h+" h ago":Math.round(h/24)+" days ago"}
 function renderUpdated(){
-  $("updated").textContent=META&&META.updatedAt?`Schedule updated ${relTime(META.updatedAt)}`:loadState==="offline"?"Couldn't load the schedule. Try refreshing the page.":"";
+  const zone=prefs.tz==="utc"?"UTC":VIEWER_TZ.replace(/_/g," ");
+  const upd=META&&META.updatedAt?`Schedule updated ${relTime(META.updatedAt)}`:loadState==="offline"?"Couldn't load the schedule. Try refreshing the page.":"";
+  $("updated").textContent=[upd,`Days and times shown in ${zone}`].filter(Boolean).join(" · ");
 }
+
 async function loadSchedule(){
   try{
     const res=await fetch("schedule.json",{cache:"no-store",credentials:"omit"});
@@ -207,16 +222,17 @@ async function loadSchedule(){
 }
 loadSchedule();
 setInterval(loadSchedule,5*60000);
-setInterval(()=>{renderLive();renderUpdated()},60000);
+setInterval(()=>{if(refreshToday())render();else{renderLive();renderUpdated()}},60000);
 
 /* ===== events ===== */
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".day");if(!b)return;selected=b.dataset.k;
   const [y,m]=selected.split("-").map(Number);if(m-1!==view.m){view={y,m:m-1}}render()});
 $("prev").onclick=()=>{view.m--;if(view.m<0){view.m=11;view.y--}render()};
 $("next").onclick=()=>{view.m++;if(view.m>11){view.m=0;view.y++}render()};
-$("todayBtn").onclick=()=>{view={y:now.getUTCFullYear(),m:now.getUTCMonth()};selected=todayKey;render()};
-$("tzLocal").onclick=()=>{prefs.tz="local";savePrefs();render()};
-$("tzUtc").onclick=()=>{prefs.tz="utc";savePrefs();render()};
+$("todayBtn").onclick=()=>{refreshToday();view=todayView();selected=todayKey;render()};
+function setTz(tz){if(prefs.tz===tz)return;const wasToday=selected===todayKey;prefs.tz=tz;savePrefs();refreshToday();indexStreams();if(wasToday){selected=todayKey;view=todayView()}render()}
+$("tzLocal").onclick=()=>setTz("local");
+$("tzUtc").onclick=()=>setTz("utc");
 $("wkMon").onclick=()=>{prefs.wk=1;savePrefs();render()};
 $("wkSun").onclick=()=>{prefs.wk=0;savePrefs();render()};
 $("motOn").onclick=()=>{prefs.motion=true;savePrefs();render()};
