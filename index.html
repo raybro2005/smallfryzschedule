@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; manifest-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="A fan-made calendar of SmallFryz's Twitch streams.">
+<title>SmallFryz Schedule</title>
+<link rel="icon" href="head.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" id="app">
+  <header>
+    <div class="school" id="school" aria-hidden="true"></div>
+    <a class="brand" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">
+      <img id="brandHead" alt="" src="">
+      smallfryz schedule
+    </a>
+    <a class="livechip" id="livechip" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer"><span class="dot"></span><span id="livetext">Loading…</span></a>
+    <div class="updated" id="updated"></div>
+  </header>
+
+  <div class="monthbar">
+    <h1 id="monthTitle">october<small>2026</small></h1>
+    <div class="nav">
+      <button id="prev" aria-label="Previous month">←</button>
+      <button id="todayBtn">Today</button>
+      <button id="next" aria-label="Next month">→</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <section class="cal" aria-label="Month calendar">
+      <div class="dow" id="dow"></div>
+      <div class="grid" id="grid"></div>
+      <div class="legendrow">
+        <span><i class="sw" style="background:var(--stream)"></i>Stream</span>
+        <span><i class="sw" style="background:var(--off)"></i>No stream</span>
+        <span><i class="sw" style="background:var(--event);border-radius:999px;height:7px"></i>Event</span>
+        <span><span class="mono" style="color:var(--accent)">✓</span>Happened</span>
+        <span><span class="mono">?</span>Unsure</span>
+      </div>
+      <div class="counts" id="counts"></div>
+      <div class="settings">
+        <span>Times in
+          <span class="seg" role="group" aria-label="Time zone">
+            <button id="tzLocal" aria-pressed="true">your time</button><button id="tzUtc" aria-pressed="false">UTC</button>
+          </span>
+        </span>
+        <span>Week starts
+          <span class="seg" role="group" aria-label="Week start">
+            <button id="wkMon" aria-pressed="true">Mon</button><button id="wkSun" aria-pressed="false">Sun</button>
+          </span>
+        </span>
+        <span>Heads
+          <span class="seg" role="group" aria-label="Animation">
+            <button id="motOn" aria-pressed="true">floating</button><button id="motOff" aria-pressed="false">still</button>
+          </span>
+        </span>
+      </div>
+    </section>
+
+    <aside class="detail" id="detail" aria-live="polite"></aside>
+  </div>
+
+  <section class="guide">
+    <h2>Reading the calendar</h2>
+    <div>
+      <h3>What a day can be</h3>
+      <p><span class="demo"><i style="background:var(--stream)"></i><b style="color:var(--stream-ink)">12</b></span><strong>Stream.</strong> He went live, or a stream is on the books. Past streams fade a little so upcoming ones stand out.</p>
+      <p><span class="demo"><i style="background:var(--off);inset:10px 0"></i><b>12</b></span><strong>No stream.</strong> Nothing went out that day. Back-to-back days off join into one long blob.</p>
+      <p><span class="demo"><i style="background:var(--event);inset:auto 2px 4px;height:8px;border-radius:9px"></i><b>12</b></span><strong>Event.</strong> Something that runs across days, like a voting window or a viewer tourney. It sits under the numbers and can share a day with a stream.</p>
+    </div>
+    <div>
+      <h3>Little markers</h3>
+      <ul>
+        <li><span class="mono" style="color:var(--accent)">✓</span> It happened as planned.</li>
+        <li><span class="mono">?</span> Announced but not confirmed yet, or no start time given.</li>
+        <li><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--live)"></span> Live at the last update.</li>
+        <li>🎃 Holidays and special days get a sticker.</li>
+        <li>Faded numbers with no blob are days this page has no record for yet.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Times</h3>
+      <p>Every start time shows in your own time zone, with UTC beside it. Calendar days follow UTC, so a stream that starts at 20:00 UTC sits on that UTC date even if it is already tomorrow where you are.</p>
+      <p>He usually goes live around 20:00–21:00 UTC and streams four to six hours. Click any day for the title, collab partners and peak viewers.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Fan-made, not affiliated with SmallFryz or Twitch. The schedule refreshes every few hours from his public stream history. Upcoming days come from what he announces in stream titles, so treat them as likely, not promised.</p>
+    <p>All content and credit goes to <a href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">SmallFryz</a>. Layout idea borrowed from ludwigschedule.com.</p>
+  </footer>
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
