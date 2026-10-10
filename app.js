@@ -11,15 +11,16 @@ const key=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const now=new Date();
 let todayKey="";
 const VIEWER_TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||"your time zone"}catch(e){return "your time zone"}})();
-/* Friendly zone label: "NA - Edmonton" for the US and Canada, "EU - London" for Europe, otherwise the zone name. */
+/* Friendly zone label: "NA - Edmonton" for the US, Canada and Mexico, "EU - London" for Europe, otherwise the zone name. */
 const NA_ZONES=new Set(("New_York Detroit Kentucky/Louisville Kentucky/Monticello Indiana/Indianapolis Indiana/Vincennes Indiana/Winamac "+
   "Indiana/Marengo Indiana/Petersburg Indiana/Vevay Indiana/Tell_City Indiana/Knox Chicago Menominee North_Dakota/Center "+
   "North_Dakota/New_Salem North_Dakota/Beulah Denver Boise Phoenix Los_Angeles Anchorage Juneau Sitka Metlakatla Yakutat Nome Adak "+
   "St_Johns Halifax Glace_Bay Moncton Goose_Bay Toronto Montreal Nipigon Thunder_Bay Iqaluit Pangnirtung Atikokan Winnipeg "+
   "Rainy_River Resolute Rankin_Inlet Regina Swift_Current Edmonton Cambridge_Bay Yellowknife Inuvik Creston Dawson_Creek "+
-  "Fort_Nelson Whitehorse Dawson Vancouver Blanc-Sablon").split(" ").map(z=>"America/"+z)
+  "Fort_Nelson Whitehorse Dawson Vancouver Blanc-Sablon "+
+  "Mexico_City Cancun Merida Monterrey Matamoros Chihuahua Ciudad_Juarez Ojinaga Mazatlan Bahia_Banderas Hermosillo Tijuana").split(" ").map(z=>"America/"+z)
   .concat(["Pacific/Honolulu","US/Eastern","US/Central","US/Mountain","US/Pacific","US/Alaska","US/Hawaii","US/Arizona",
-    "Canada/Atlantic","Canada/Central","Canada/Eastern","Canada/Mountain","Canada/Newfoundland","Canada/Pacific","Canada/Saskatchewan","Canada/Yukon"]));
+    "Canada/Atlantic","Canada/Central","Canada/Eastern","Canada/Mountain","Canada/Newfoundland","Canada/Pacific","Canada/Saskatchewan","Canada/Yukon","Mexico/General","Mexico/BajaNorte","Mexico/BajaSur"]));
 function zoneLabel(tz){
   if(!tz||!tz.includes("/"))return tz||"your time zone";
   const city=tz.split("/").pop().replace(/_/g," ");
