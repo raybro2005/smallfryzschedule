@@ -2,7 +2,7 @@
    A scheduled task refreshes it from his public stream history. All start times are UTC. ===== */
 const HEAD="head.png";
 let TRACKED_FROM="2026-09-12";
-let STREAMS=[], EVENTS=[], PROMISES=[], META=null, loadState="loading";
+let STREAMS=[], EVENTS=[], META=null, loadState="loading";
 const OCCASIONS = {"2026-10-31":{icon:"🎃",label:"Halloween"},"2026-12-25":{icon:"🎄",label:"Christmas"},"2027-01-01":{icon:"🎆",label:"New Year's Day"}};
 
 /* ===== helpers ===== */
@@ -40,15 +40,6 @@ function cleanEvent(o){
   if((Date.parse(o.to)-Date.parse(o.from))/864e5>120)return null;
   const title=str(o.title,100); if(!title)return null;
   return {from:o.from,to:o.to,title,note:str(o.note,300)};
-}
-const PROMISE_STATUS=["kept","pending","broken","unsure"];
-function cleanPromise(o){
-  if(!o||typeof o!=="object"||!validDate(o.said)||!PROMISE_STATUS.includes(o.status))return null;
-  const text=str(o.text,160); if(!text)return null;
-  const out={text,said:o.said,status:o.status,note:str(o.note,300),source:str(o.source,300)};
-  if(validDate(o.due))out.due=o.due;
-  if(validDate(o.resolved))out.resolved=o.resolved;
-  return out;
 }
 function cleanMeta(o){
   if(!o||typeof o!=="object")return null;
@@ -153,7 +144,6 @@ function render(){
   renderDetail();
   renderLive();
   renderUpdated();
-  renderPromises();
 }
 
 function renderDetail(){
@@ -235,7 +225,6 @@ async function loadSchedule(){
     if(!j||typeof j!=="object")throw new Error("bad data");
     STREAMS=(Array.isArray(j.streams)?j.streams:[]).slice(0,1000).map(cleanStream).filter(Boolean);
     EVENTS=(Array.isArray(j.events)?j.events:[]).slice(0,200).map(cleanEvent).filter(Boolean);
-    PROMISES=(Array.isArray(j.promises)?j.promises:[]).slice(0,300).map(cleanPromise).filter(Boolean);
     META=cleanMeta(j); if(META&&META.trackedFrom)TRACKED_FROM=META.trackedFrom;
     indexStreams(); loadState="ready";
   }catch(e){ if(loadState!=="ready")loadState="offline"; }
@@ -285,42 +274,8 @@ $("openSettingsFab").addEventListener("click",openSettings);
 $("closeSettings").addEventListener("click",()=>dlg.close());
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()}); // click outside the panel closes it
 
-/* ===== tabs: Calendar / Promises ===== */
-function showView(v){
-  if(v!=="promises")v="calendar";
-  $("viewCalendar").hidden=v!=="calendar";
-  $("viewPromises").hidden=v!=="promises";
-  document.querySelectorAll(".tab[data-view]").forEach(t=>{if(t.dataset.view===v)t.setAttribute("aria-current","page");else t.removeAttribute("aria-current")});
-}
-document.querySelectorAll(".tab[data-view]").forEach(t=>t.addEventListener("click",()=>{
-  const v=t.dataset.view; if(location.hash!=="#"+v)history.replaceState(null,"","#"+v); showView(v); window.scrollTo(0,0);
-}));
-window.addEventListener("hashchange",()=>showView(location.hash.slice(1)));
-
-/* ===== promises page ===== */
-function renderPromises(){
-  const list=$("promiseList");
-  if(loadState!=="ready"){list.innerHTML=`<p class="pempty">${loadState==="offline"?"Couldn't load promises. Try refreshing the page.":"Loading…"}</p>`;$("promiseCounts").textContent="";return}
-  const order={pending:0,unsure:1,kept:2,broken:3};
-  const items=PROMISES.slice().sort((a,b)=>order[a.status]-order[b.status]||(a.said<b.said?1:-1));
-  const n=st=>PROMISES.filter(p=>p.status===st).length;
-  $("promiseCounts").textContent=PROMISES.length?`${n("kept")} kept · ${n("pending")} pending · ${n("broken")} broken`:"none yet";
-  if(!items.length){list.innerHTML=`<p class="pempty">No promises tracked yet. When he says he'll do something, it shows up here.</p>`;return}
-  const label={kept:"Kept",pending:"Pending",broken:"Didn't happen",unsure:"Unsure"};
-  list.innerHTML=items.map(p=>{
-    const meta=[`Said <button data-day="${p.said}">${fmtShort(p.said)}</button>`];
-    if(p.due)meta.push(`Due <button data-day="${p.due}">${fmtShort(p.due)}</button>`);
-    if(p.resolved)meta.push(`${p.status==="kept"?"Done":"Settled"} <button data-day="${p.resolved}">${fmtShort(p.resolved)}</button>`);
-    return `<article class="promise"><span class="pstat ${p.status}">${label[p.status]}</span><h3>${esc(p.text)}</h3>
-      <div class="pmeta">${meta.join("")}</div>${p.note?`<p>${esc(p.note)}</p>`:""}${p.source?`<div class="rawtitle">From: ${esc(p.source)}</div>`:""}</article>`;
-  }).join("");
-}
-$("promiseList").addEventListener("click",e=>{
-  const b=e.target.closest("button[data-day]"); if(!b||!validDate(b.dataset.day))return;
-  selected=b.dataset.day; const [y,m]=selected.split("-").map(Number); view={y,m:m-1};
-  history.replaceState(null,"","#calendar"); showView("calendar"); render(); window.scrollTo(0,0);
-});
+/* Calendar tab: back to this month, scrolled to the top */
+document.querySelector('.tab[data-view="calendar"]').addEventListener("click",()=>{refreshToday();view=todayView();selected=todayKey;render();window.scrollTo({top:0,behavior:"smooth"})});
 
 applyPrefs();
-showView(location.hash.slice(1));
 render();
