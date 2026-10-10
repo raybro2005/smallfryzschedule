@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-10T04:18:21Z",
+ "updatedAt": "2026-10-10T21:35:56Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -240,16 +240,15 @@
   },
   {
    "d": "2026-10-10",
+   "start": "21:22",
    "dur": null,
-   "note": "Announced in his stream titles all week as \"viewer tourney on Saturday\". No start time given yet.",
-   "planned": true,
-   "start": null,
+   "title": "41/100 t1 subs + late stream",
    "tags": [
-    "Viewers",
-    "Tournament"
+    "Just Chatting"
    ],
-   "title": "Viewer tourney",
-   "unsure": true
+   "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
+   "seen": "2026-10-10T21:35:56Z",
+   "peak": 29
   }
  ],
  "events": [
