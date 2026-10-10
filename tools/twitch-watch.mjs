@@ -8,7 +8,7 @@ const HEARTBEAT_MIN = 30;   // while live, refresh updatedAt at least this often
 const PEAK_EVERY_MIN = 15;  // don't commit peak-viewer bumps more often than this
 
 const { TWITCH_CLIENT_ID: id, TWITCH_CLIENT_SECRET: secret } = process.env;
-if (!id || !secret) { console.log("Twitch secrets not set yet; skipping."); process.exit(0); }
+if (!id || !secret) { console.error("Twitch secrets are missing. Add TWITCH_CLIENT_ID and TWITCH_CLIENT_SECRET in Settings > Secrets and variables > Actions."); process.exit(1); }
 
 const now = new Date();
 const iso = d => d.toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -47,6 +47,8 @@ const last = j.updatedAt ? new Date(j.updatedAt) : new Date(0);
 let important = false, minor = false, note = "";
 
 const live = await twitch();
+const summary = (msg) => { try { writeFileSync(process.env.GITHUB_STEP_SUMMARY || "/dev/null", `### Twitch check\n${msg}\n`, { flag: "a" }); } catch {} };
+summary(live ? `SmallFryz is **live** (${live.viewer_count} viewers): ${live.title}` : "SmallFryz is **offline**.");
 
 if (live) {
   const start = new Date(live.started_at);
