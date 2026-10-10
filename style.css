@@ -136,7 +136,7 @@ footer p{max-width:70ch;margin:0 0 6px}
 :root[data-text="large"]{font-size:112.5%}
 :root[data-text="larger"]{font-size:125%}
 
-/* ===== tab bar (Calendar / Settings) ===== */
+/* ===== bottom bar (Settings) ===== */
 .tabbar{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:10px}
 .tab,.gearfab{display:inline-flex;align-items:center;gap:8px;background:var(--surface);color:var(--ink);border:1.5px solid var(--ink);border-radius:8px;
   box-shadow:3px 3px 0 color-mix(in srgb,var(--ink) 35%,transparent);padding:10px 16px;cursor:pointer;

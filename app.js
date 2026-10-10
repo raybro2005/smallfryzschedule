@@ -274,8 +274,5 @@ $("openSettingsFab").addEventListener("click",openSettings);
 $("closeSettings").addEventListener("click",()=>dlg.close());
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()}); // click outside the panel closes it
 
-/* Calendar tab: back to this month, scrolled to the top */
-document.querySelector('.tab[data-view="calendar"]').addEventListener("click",()=>{refreshToday();view=todayView();selected=todayKey;render();window.scrollTo({top:0,behavior:"smooth"})});
-
 applyPrefs();
 render();
