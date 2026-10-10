@@ -32,6 +32,7 @@ header{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-
 .livechip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1.5px solid var(--line);font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink)}
 .livechip .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
 .livechip.on{border-color:var(--live)}
+.livetimer{font-variant-numeric:tabular-nums}
 .livechip.on .dot{background:var(--live);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--live) 25%,transparent)}}
 .school{position:absolute;inset:0;pointer-events:none;z-index:-0}

@@ -157,7 +157,7 @@ function renderDetail(){
     if(t){const f=fmtTime(t);rows+=`<dt>Start</dt><dd>${f.main} <span class="mono" style="color:var(--muted)">· ${f.side}</span></dd>`}
     else rows+=`<dt>Start</dt><dd>Time not announced</dd>`;
     if(s.dur)rows+=`<dt>Length</dt><dd>${fmtDur(s.dur)}</dd>`;
-    else if(!s.planned)rows+=`<dt>Length</dt><dd>${live?"Still going":"Not recorded"}</dd>`;
+    else if(!s.planned)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:"Not recorded"}</dd>`;
     if(s.peak)rows+=`<dt>Peak</dt><dd>${s.peak.toLocaleString()} viewers</dd>`;
     if(s.with&&s.with.length)rows+=`<dt>With</dt><dd>${s.with.map(n=>`<a href="${esc(twitchUrl(n))}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>`).join(", ")}</dd>`;
     h+=`<div class="entry">${chip}<h3>${esc(s.title)}</h3><dl>${rows}</dl>`;
@@ -175,10 +175,13 @@ function renderDetail(){
 }
 function fmtShort(k){return new Date(k+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"UTC"})}
 
+/* ===== live timer: how long the current stream has been going, ticking every second ===== */
+function fmtElapsed(ms){const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),sec=t%60;return `${h}:${pad(m)}:${pad(sec)}`}
+setInterval(()=>{document.querySelectorAll(".livetimer").forEach(el=>{const since=Number(el.dataset.since);if(since)el.textContent=fmtElapsed(Date.now()-since)})},1000);
 function renderLive(){
   const live=STREAMS.find(isLive);
   $("livechip").classList.toggle("on",!!live);
-  if(live){$("livetext").textContent="Live now: "+live.title}
+  if(live){$("livetext").innerHTML=`Live for <span class="livetimer" data-since="${startDate(live).getTime()}">${fmtElapsed(Date.now()-startDate(live).getTime())}</span>: ${esc(live.title)}`}
   else{
     const next=STREAMS.filter(s=>s.planned&&(s.k||s.d)>=todayKey).sort((a,b)=>a.sortAt-b.sortAt)[0];
     $("livetext").textContent=loadState==="loading"?"Loading…":next?`Next: ${next.title}, ${fmtShort(next.k||next.d)}`:"Offline";
