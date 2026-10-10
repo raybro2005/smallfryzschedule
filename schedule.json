@@ -265,5 +265,23 @@
    "title": "Viewer tourney",
    "to": "2026-10-10"
   }
+ ],
+ "promises": [
+  {
+   "text": "Viewer tourney on Saturday",
+   "said": "2026-10-08",
+   "due": "2026-10-10",
+   "status": "pending",
+   "note": "Announced in his stream titles on Thursday and Friday.",
+   "source": "🍄RESIDENT EVIL VII🍄RESIDENTING MY EVIL🍄 REACTS LATER🍄VIEWER TOURNEY ON SATURDAY🍄"
+  },
+  {
+   "text": "New YouTube videos soon",
+   "said": "2026-09-14",
+   "resolved": "2026-09-25",
+   "status": "kept",
+   "note": "His stream titles from 25 September on said a new YouTube video was out.",
+   "source": "😎REACTS DAY😎GAMBA DAY😎HIDDEN GEM 2026😎LOCKED IN😎NEW YT VIDS SOON😎#VoteSmallFryz😎"
+  }
  ]
 }

@@ -25,6 +25,7 @@
     <div class="updated" id="updated"></div>
   </header>
 
+  <main id="viewCalendar">
   <div class="monthbar">
     <h1 id="monthTitle">october<small>2026</small></h1>
     <div class="nav">
@@ -46,23 +47,6 @@
         <span><span class="mono">?</span>Unsure</span>
       </div>
       <div class="counts" id="counts"></div>
-      <div class="settings">
-        <span>Times in
-          <span class="seg" role="group" aria-label="Time zone">
-            <button id="tzLocal" aria-pressed="true">your time</button><button id="tzUtc" aria-pressed="false">UTC</button>
-          </span>
-        </span>
-        <span>Week starts
-          <span class="seg" role="group" aria-label="Week start">
-            <button id="wkMon" aria-pressed="true">Mon</button><button id="wkSun" aria-pressed="false">Sun</button>
-          </span>
-        </span>
-        <span>Heads
-          <span class="seg" role="group" aria-label="Animation">
-            <button id="motOn" aria-pressed="true">floating</button><button id="motOff" aria-pressed="false">still</button>
-          </span>
-        </span>
-      </div>
     </section>
 
     <aside class="detail" id="detail" aria-live="polite"></aside>
@@ -88,10 +72,19 @@
     </div>
     <div>
       <h3>Times</h3>
-      <p>The whole calendar follows your own time zone: each stream sits on the day it starts where you are, and its start time shows in your time with UTC beside it. Flip the switch under the calendar to see everything in UTC instead.</p>
+      <p>The whole calendar follows your own time zone: each stream sits on the day it starts where you are, and its start time shows in your time with UTC beside it. Open Settings (the sun button) to see everything in UTC instead.</p>
       <p>He usually goes live around 20:00–21:00 UTC (that's afternoon in North America and late evening in Europe) and streams four to six hours. Click any day for the title, collab partners and peak viewers.</p>
     </div>
   </section>
+  </main>
+
+  <main id="viewPromises" hidden>
+    <div class="monthbar">
+      <h1>promises<small id="promiseCounts">loading</small></h1>
+    </div>
+    <p class="intro">Things SmallFryz has said he'll do, in his stream titles or on stream, and whether they happened. Click a date to see that day on the calendar.</p>
+    <div class="promises" id="promiseList"></div>
+  </main>
 
   <footer>
     <p>Fan-made, not affiliated with SmallFryz or Twitch. The schedule refreshes every few hours from his public stream history. Upcoming days come from what he announces in stream titles, so treat them as likely, not promised.</p>
@@ -99,6 +92,64 @@
     <p class="credit">Site created by Raybro.</p>
   </footer>
 </div>
+<nav class="tabbar" id="tabbar" aria-label="Pages">
+  <button class="tab" data-view="calendar" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendar</button>
+  <button class="tab" data-view="promises"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3.5 3.5v13.5H6z"/><path d="M9 11h6M9 15h6"/></svg>Promises</button>
+  <button class="tab icononly" id="openSettings" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
+</nav>
+<button class="gearfab" id="openSettingsFab" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
+
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <div class="sethead">
+    <h2 id="settingsTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>Settings</h2>
+    <button class="closebtn" id="closeSettings" aria-label="Close settings">×</button>
+  </div>
+  <div class="setgrid">
+    <fieldset>
+      <legend>Look</legend>
+      <div class="setlabel" id="lblTheme">Theme</div>
+      <div class="choices" role="group" aria-labelledby="lblTheme" data-pref="theme">
+        <button data-val="light">Day</button><button data-val="dark">Night</button><button data-val="system">System</button>
+      </div>
+      <div class="setlabel" id="lblText">Text size</div>
+      <div class="choices" role="group" aria-labelledby="lblText" data-pref="text">
+        <button data-val="normal">Normal</button><button data-val="large">Large</button><button data-val="larger">Larger</button>
+      </div>
+      <label class="check"><input type="checkbox" id="prefContrast"> High contrast</label>
+    </fieldset>
+    <fieldset>
+      <legend>Motion</legend>
+      <div class="setlabel" id="lblMotion">Animation</div>
+      <div class="choices" role="group" aria-labelledby="lblMotion" data-pref="motion">
+        <button data-val="system">System</button><button data-val="on">On</button><button data-val="off">Off</button>
+      </div>
+      <p class="sethelp">The floating heads and the pulsing live dot. System follows your device's reduce-motion setting.</p>
+    </fieldset>
+    <fieldset>
+      <legend>Layout</legend>
+      <div class="setlabel" id="lblTabbar">Tab bar</div>
+      <div class="choices five" role="group" aria-labelledby="lblTabbar" data-pref="tabbar">
+        <button data-val="bottom">Bottom</button><button data-val="top">Top</button><button data-val="left">Left</button><button data-val="right">Right</button><button data-val="hidden">Hidden</button>
+      </div>
+      <label class="setlabel" for="prefWeek">Week starts on</label>
+      <select id="prefWeek">
+        <option value="1">Mon</option><option value="2">Tue</option><option value="3">Wed</option><option value="4">Thu</option><option value="5">Fri</option><option value="6">Sat</option><option value="0">Sun</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>Time</legend>
+      <div class="setlabel" id="lblTz">Show days and times in</div>
+      <div class="choices" role="group" aria-labelledby="lblTz" data-pref="tz">
+        <button data-val="local">Your time</button><button data-val="utc">UTC</button>
+      </div>
+      <p class="sethelp" id="tzHelp"></p>
+    </fieldset>
+  </div>
+  <div class="setfoot">
+    <span>Saved on this device.</span>
+    <button class="resetbtn" id="resetSettings">Reset settings</button>
+  </div>
+</dialog>
 <script src="app.js" defer></script>
 </body>
 </html>

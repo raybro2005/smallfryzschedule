@@ -2,7 +2,7 @@
    A scheduled task refreshes it from his public stream history. All start times are UTC. ===== */
 const HEAD="head.png";
 let TRACKED_FROM="2026-09-12";
-let STREAMS=[], EVENTS=[], META=null, loadState="loading";
+let STREAMS=[], EVENTS=[], PROMISES=[], META=null, loadState="loading";
 const OCCASIONS = {"2026-10-31":{icon:"🎃",label:"Halloween"},"2026-12-25":{icon:"🎄",label:"Christmas"},"2027-01-01":{icon:"🎆",label:"New Year's Day"}};
 
 /* ===== helpers ===== */
@@ -41,6 +41,15 @@ function cleanEvent(o){
   const title=str(o.title,100); if(!title)return null;
   return {from:o.from,to:o.to,title,note:str(o.note,300)};
 }
+const PROMISE_STATUS=["kept","pending","broken","unsure"];
+function cleanPromise(o){
+  if(!o||typeof o!=="object"||!validDate(o.said)||!PROMISE_STATUS.includes(o.status))return null;
+  const text=str(o.text,160); if(!text)return null;
+  const out={text,said:o.said,status:o.status,note:str(o.note,300),source:str(o.source,300)};
+  if(validDate(o.due))out.due=o.due;
+  if(validDate(o.resolved))out.resolved=o.resolved;
+  return out;
+}
 function cleanMeta(o){
   if(!o||typeof o!=="object")return null;
   const out={};
@@ -73,8 +82,16 @@ function status(k){
 }
 
 /* ===== settings ===== */
-let prefs={tz:"local",wk:1,motion:true};
-try{Object.assign(prefs,JSON.parse(localStorage.getItem("sfz-prefs")||"{}"))}catch(e){}
+const DEFAULT_PREFS={theme:"system",text:"normal",contrast:false,motion:"system",tabbar:"bottom",wk:1,tz:"local"};
+const PREF_CHOICES={theme:["light","dark","system"],text:["normal","large","larger"],motion:["system","on","off"],tabbar:["bottom","top","left","right","hidden"],tz:["local","utc"]};
+let prefs={...DEFAULT_PREFS};
+try{
+  const saved=JSON.parse(localStorage.getItem("sfz-prefs")||"{}")||{};
+  if(typeof saved.motion==="boolean")saved.motion=saved.motion?"system":"off"; // older saved setting
+  for(const k in PREF_CHOICES)if(PREF_CHOICES[k].includes(saved[k]))prefs[k]=saved[k];
+  if(Number.isInteger(saved.wk)&&saved.wk>=0&&saved.wk<=6)prefs.wk=saved.wk;
+  if(typeof saved.contrast==="boolean")prefs.contrast=saved.contrast;
+}catch(e){}
 function savePrefs(){try{localStorage.setItem("sfz-prefs",JSON.stringify(prefs))}catch(e){}}
 function fmtTime(d){
   const utc=d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:"UTC"})+" UTC";
@@ -136,10 +153,7 @@ function render(){
   renderDetail();
   renderLive();
   renderUpdated();
-  ["tzLocal","tzUtc"].forEach(id=>$(id).setAttribute("aria-pressed",String((id==="tzUtc")===(prefs.tz==="utc"))));
-  ["wkMon","wkSun"].forEach(id=>$(id).setAttribute("aria-pressed",String((id==="wkMon")===(prefs.wk===1))));
-  ["motOn","motOff"].forEach(id=>$(id).setAttribute("aria-pressed",String((id==="motOn")===prefs.motion)));
-  document.body.classList.toggle("nomotion",!prefs.motion);
+  renderPromises();
 }
 
 function renderDetail(){
@@ -221,6 +235,7 @@ async function loadSchedule(){
     if(!j||typeof j!=="object")throw new Error("bad data");
     STREAMS=(Array.isArray(j.streams)?j.streams:[]).slice(0,1000).map(cleanStream).filter(Boolean);
     EVENTS=(Array.isArray(j.events)?j.events:[]).slice(0,200).map(cleanEvent).filter(Boolean);
+    PROMISES=(Array.isArray(j.promises)?j.promises:[]).slice(0,300).map(cleanPromise).filter(Boolean);
     META=cleanMeta(j); if(META&&META.trackedFrom)TRACKED_FROM=META.trackedFrom;
     indexStreams(); loadState="ready";
   }catch(e){ if(loadState!=="ready")loadState="offline"; }
@@ -237,10 +252,75 @@ $("prev").onclick=()=>{view.m--;if(view.m<0){view.m=11;view.y--}render()};
 $("next").onclick=()=>{view.m++;if(view.m>11){view.m=0;view.y++}render()};
 $("todayBtn").onclick=()=>{refreshToday();view=todayView();selected=todayKey;render()};
 function setTz(tz){if(prefs.tz===tz)return;const wasToday=selected===todayKey;prefs.tz=tz;savePrefs();refreshToday();indexStreams();if(wasToday){selected=todayKey;view=todayView()}render()}
-$("tzLocal").onclick=()=>setTz("local");
-$("tzUtc").onclick=()=>setTz("utc");
-$("wkMon").onclick=()=>{prefs.wk=1;savePrefs();render()};
-$("wkSun").onclick=()=>{prefs.wk=0;savePrefs();render()};
-$("motOn").onclick=()=>{prefs.motion=true;savePrefs();render()};
-$("motOff").onclick=()=>{prefs.motion=false;savePrefs();render()};
+
+/* ===== settings panel ===== */
+function applyPrefs(){
+  const root=document.documentElement;
+  if(prefs.theme==="system")delete root.dataset.theme;else root.dataset.theme=prefs.theme;
+  root.dataset.text=prefs.text;
+  root.dataset.motion=prefs.motion;
+  root.dataset.tabbar=prefs.tabbar;
+  if(prefs.contrast)root.dataset.contrast="high";else delete root.dataset.contrast;
+  document.querySelectorAll("#settings .choices").forEach(g=>{
+    const cur=String(prefs[g.dataset.pref]);
+    g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.val===cur)));
+  });
+  $("prefContrast").checked=prefs.contrast;
+  $("prefWeek").value=String(prefs.wk);
+  $("tzHelp").textContent=`Your time zone: ${VIEWER_TZ.replace(/_/g," ")}.`;
+}
+document.querySelectorAll("#settings .choices").forEach(g=>g.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-val]"); if(!b)return;
+  const k=g.dataset.pref, v=b.dataset.val; if(!PREF_CHOICES[k].includes(v))return;
+  if(k==="tz"){setTz(v);applyPrefs();return}
+  prefs[k]=v; savePrefs(); applyPrefs();
+}));
+$("prefContrast").addEventListener("change",e=>{prefs.contrast=e.target.checked;savePrefs();applyPrefs()});
+$("prefWeek").addEventListener("change",e=>{const v=Number(e.target.value);if(Number.isInteger(v)&&v>=0&&v<=6){prefs.wk=v;savePrefs();render()}});
+$("resetSettings").addEventListener("click",()=>{const tzChanged=prefs.tz!==DEFAULT_PREFS.tz;prefs={...DEFAULT_PREFS};savePrefs();if(tzChanged){refreshToday();indexStreams();selected=todayKey;view=todayView()}applyPrefs();render()});
+const dlg=$("settings");
+function openSettings(){try{dlg.showModal()}catch(e){dlg.setAttribute("open","")}}
+$("openSettings").addEventListener("click",openSettings);
+$("openSettingsFab").addEventListener("click",openSettings);
+$("closeSettings").addEventListener("click",()=>dlg.close());
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()}); // click outside the panel closes it
+
+/* ===== tabs: Calendar / Promises ===== */
+function showView(v){
+  if(v!=="promises")v="calendar";
+  $("viewCalendar").hidden=v!=="calendar";
+  $("viewPromises").hidden=v!=="promises";
+  document.querySelectorAll(".tab[data-view]").forEach(t=>{if(t.dataset.view===v)t.setAttribute("aria-current","page");else t.removeAttribute("aria-current")});
+}
+document.querySelectorAll(".tab[data-view]").forEach(t=>t.addEventListener("click",()=>{
+  const v=t.dataset.view; if(location.hash!=="#"+v)history.replaceState(null,"","#"+v); showView(v); window.scrollTo(0,0);
+}));
+window.addEventListener("hashchange",()=>showView(location.hash.slice(1)));
+
+/* ===== promises page ===== */
+function renderPromises(){
+  const list=$("promiseList");
+  if(loadState!=="ready"){list.innerHTML=`<p class="pempty">${loadState==="offline"?"Couldn't load promises. Try refreshing the page.":"Loading…"}</p>`;$("promiseCounts").textContent="";return}
+  const order={pending:0,unsure:1,kept:2,broken:3};
+  const items=PROMISES.slice().sort((a,b)=>order[a.status]-order[b.status]||(a.said<b.said?1:-1));
+  const n=st=>PROMISES.filter(p=>p.status===st).length;
+  $("promiseCounts").textContent=PROMISES.length?`${n("kept")} kept · ${n("pending")} pending · ${n("broken")} broken`:"none yet";
+  if(!items.length){list.innerHTML=`<p class="pempty">No promises tracked yet. When he says he'll do something, it shows up here.</p>`;return}
+  const label={kept:"Kept",pending:"Pending",broken:"Didn't happen",unsure:"Unsure"};
+  list.innerHTML=items.map(p=>{
+    const meta=[`Said <button data-day="${p.said}">${fmtShort(p.said)}</button>`];
+    if(p.due)meta.push(`Due <button data-day="${p.due}">${fmtShort(p.due)}</button>`);
+    if(p.resolved)meta.push(`${p.status==="kept"?"Done":"Settled"} <button data-day="${p.resolved}">${fmtShort(p.resolved)}</button>`);
+    return `<article class="promise"><span class="pstat ${p.status}">${label[p.status]}</span><h3>${esc(p.text)}</h3>
+      <div class="pmeta">${meta.join("")}</div>${p.note?`<p>${esc(p.note)}</p>`:""}${p.source?`<div class="rawtitle">From: ${esc(p.source)}</div>`:""}</article>`;
+  }).join("");
+}
+$("promiseList").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-day]"); if(!b||!validDate(b.dataset.day))return;
+  selected=b.dataset.day; const [y,m]=selected.split("-").map(Number); view={y,m:m-1};
+  history.replaceState(null,"","#calendar"); showView("calendar"); render(); window.scrollTo(0,0);
+});
+
+applyPrefs();
+showView(location.hash.slice(1));
 render();
