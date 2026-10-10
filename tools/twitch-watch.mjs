@@ -83,9 +83,10 @@ if (live) {
   }
 }
 
-if (!important) { console.log(live ? "Live, nothing new to save yet." : "Offline, nothing to update."); process.exit(0); }
+const STATE = process.env.WATCH_STATE || "/dev/null";
+if (!important) { writeFileSync(STATE, JSON.stringify({ live: !!live, changed: false })); console.log(live ? "Live, nothing new to save yet." : "Offline, nothing to update."); process.exit(0); }
 j.updatedAt = iso(now);
 j.streams.sort((a, b) => (a.d + (a.start || "99")).localeCompare(b.d + (b.start || "99")));
 writeFileSync(FILE, JSON.stringify(j, null, 1) + "\n");
-writeFileSync(process.env.GITHUB_OUTPUT || "/dev/null", `changed=true\nmsg=${note || "Update live status"}\n`, { flag: "a" });
+writeFileSync(STATE, JSON.stringify({ live: !!live, changed: true, msg: note || "Update live status" }));
 console.log("Saved:", note || "heartbeat");

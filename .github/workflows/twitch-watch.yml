@@ -1,7 +1,7 @@
 name: Twitch live watcher
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (GitHub may run it a few minutes late)
+    - cron: "*/5 * * * *"   # GitHub often runs this late or skips; the hourly site refresh also starts it
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -11,21 +11,33 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - id: watch
-        run: node tools/twitch-watch.mjs
+      - name: Check Twitch (keeps checking every 3 minutes while he is live)
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
-      - if: steps.watch.outputs.changed == 'true'
+          WATCH_STATE: ${{ runner.temp }}/watch-state.json
         run: |
           git config user.name "twitch-watch"
           git config user.email "actions@users.noreply.github.com"
-          git add schedule.json
-          git commit -m "Live status: ${{ steps.watch.outputs.msg }}"
-          for i in 1 2 3; do git pull --rebase -q origin main && git push && break; sleep 5; done
+          deadline=$(( $(date +%s) + 330*60 ))
+          while :; do
+            git pull --rebase -q origin main
+            node tools/twitch-watch.mjs
+            live=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).live)")
+            changed=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).changed)")
+            if [ "$changed" = "true" ]; then
+              msg=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).msg)")
+              git add schedule.json
+              git commit -q -m "Live status: $msg"
+              for i in 1 2 3; do git pull --rebase -q origin main && git push -q && break; sleep 5; done
+            fi
+            [ "$live" = "true" ] || break
+            [ $(date +%s) -lt $deadline ] || break
+            sleep 180
+          done
