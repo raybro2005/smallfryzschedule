@@ -11,6 +11,22 @@ const key=(y,m,d)=>`${y}-${pad(m+1)}-${pad(d)}`;
 const now=new Date();
 let todayKey="";
 const VIEWER_TZ=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||"your time zone"}catch(e){return "your time zone"}})();
+/* Friendly zone label: "NA - Edmonton" for the US and Canada, "EU - London" for Europe, otherwise the zone name. */
+const NA_ZONES=new Set(("New_York Detroit Kentucky/Louisville Kentucky/Monticello Indiana/Indianapolis Indiana/Vincennes Indiana/Winamac "+
+  "Indiana/Marengo Indiana/Petersburg Indiana/Vevay Indiana/Tell_City Indiana/Knox Chicago Menominee North_Dakota/Center "+
+  "North_Dakota/New_Salem North_Dakota/Beulah Denver Boise Phoenix Los_Angeles Anchorage Juneau Sitka Metlakatla Yakutat Nome Adak "+
+  "St_Johns Halifax Glace_Bay Moncton Goose_Bay Toronto Montreal Nipigon Thunder_Bay Iqaluit Pangnirtung Atikokan Winnipeg "+
+  "Rainy_River Resolute Rankin_Inlet Regina Swift_Current Edmonton Cambridge_Bay Yellowknife Inuvik Creston Dawson_Creek "+
+  "Fort_Nelson Whitehorse Dawson Vancouver Blanc-Sablon").split(" ").map(z=>"America/"+z)
+  .concat(["Pacific/Honolulu","US/Eastern","US/Central","US/Mountain","US/Pacific","US/Alaska","US/Hawaii","US/Arizona",
+    "Canada/Atlantic","Canada/Central","Canada/Eastern","Canada/Mountain","Canada/Newfoundland","Canada/Pacific","Canada/Saskatchewan","Canada/Yukon"]));
+function zoneLabel(tz){
+  if(!tz||!tz.includes("/"))return tz||"your time zone";
+  const city=tz.split("/").pop().replace(/_/g," ");
+  if(NA_ZONES.has(tz))return `NA (North America) - ${city}`;
+  if(tz.startsWith("Europe/"))return `EU (Europe) - ${city}`;
+  return tz.replace(/_/g," ");
+}
 /* Which calendar day a moment falls on: the viewer's local date, or the UTC date when the UTC switch is on. */
 function dayKeyOf(date){return prefs.tz==="utc"
   ?key(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate())
@@ -213,7 +229,7 @@ function renderLive(){
 /* ===== live data ===== */
 function relTime(iso){const m=Math.round((Date.now()-new Date(iso))/6e4);if(m<1)return"just now";if(m<60)return m+" min ago";const h=Math.round(m/60);return h<48?h+" h ago":Math.round(h/24)+" days ago"}
 function renderUpdated(){
-  const zone=prefs.tz==="utc"?"UTC":VIEWER_TZ.replace(/_/g," ");
+  const zone=prefs.tz==="utc"?"UTC":zoneLabel(VIEWER_TZ);
   const upd=META&&META.updatedAt?`Schedule updated ${relTime(META.updatedAt)}`:loadState==="offline"?"Couldn't load the schedule. Try refreshing the page.":"";
   $("updated").textContent=[upd,`Days and times shown in ${zone}`].filter(Boolean).join(" · ");
 }
@@ -257,7 +273,7 @@ function applyPrefs(){
   });
   $("prefContrast").checked=prefs.contrast;
   $("prefWeek").value=String(prefs.wk);
-  $("tzHelp").textContent=`Your time zone: ${VIEWER_TZ.replace(/_/g," ")}.`;
+  $("tzHelp").textContent=`Your time zone: ${zoneLabel(VIEWER_TZ)}.`;
 }
 document.querySelectorAll("#settings .choices").forEach(g=>g.addEventListener("click",e=>{
   const b=e.target.closest("button[data-val]"); if(!b)return;
