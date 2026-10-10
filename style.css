@@ -200,3 +200,9 @@ legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-trans
 :root[data-contrast="high"] .blob.off{outline:1.5px solid var(--ink);outline-offset:-1.5px}
 
 .todaytag{font-family:var(--f-body);font-weight:400;font-size:.95rem;color:var(--muted)}
+
+/* small caption lines (update line, legend, monthly count, raw stream title) use the handwritten face */
+.updated,.legendrow,.counts,.rawtitle{font-family:var(--f-display);font-weight:400;letter-spacing:0}
+.updated{font-size:.8rem}
+.counts{font-size:.88rem}
+.legendrow .mono{font-family:var(--f-display)}
