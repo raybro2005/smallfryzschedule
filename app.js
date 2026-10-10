@@ -58,7 +58,10 @@ function indexStreams(){
 }
 function eventsOn(k){return EVENTS.filter(e=>k>=e.from&&k<=e.to)}
 function startDate(s){return s.start?new Date(`${s.d}T${s.start}:00Z`):null}
-function isLive(s){const t=startDate(s);if(!t||s.dur||s.planned)return false;const h=(Date.now()-t)/36e5;return h>=0&&h<10}
+/* A stream counts as live (and gets the timer) only if the latest data refresh, under 90 minutes old, still saw it live. */
+const LIVE_FRESH_MS=90*60000;
+function liveDataFresh(){return !!(META&&META.updatedAt)&&Date.now()-Date.parse(META.updatedAt)<LIVE_FRESH_MS}
+function isLive(s){const t=startDate(s);if(!t||s.dur||s.planned||!liveDataFresh())return false;const h=(Date.now()-t)/36e5;return h>=0&&h<10}
 function fmtDur(m){if(!m)return null;const h=Math.floor(m/60),r=m%60;return r?`${h}h ${r}m`:`${h}h`}
 function hash(str){let h=0;for(const c of str)h=(h*31+c.charCodeAt(0))|0;return Math.abs(h)}
 function blobRadius(k){const h=hash(k);const v=i=>40+((h>>(i*3))%20);return `${v(0)}% ${100-v(0)}% ${v(1)}% ${100-v(1)}% / ${v(2)}% ${v(3)}% ${100-v(3)}% ${100-v(2)}%`}
@@ -157,7 +160,7 @@ function renderDetail(){
     if(t){const f=fmtTime(t);rows+=`<dt>Start</dt><dd>${f.main} <span class="mono" style="color:var(--muted)">· ${f.side}</span></dd>`}
     else rows+=`<dt>Start</dt><dd>Time not announced</dd>`;
     if(s.dur)rows+=`<dt>Length</dt><dd>${fmtDur(s.dur)}</dd>`;
-    else if(!s.planned)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:"Not recorded"}</dd>`;
+    else if(!s.planned)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:(Date.now()-t.getTime()<12*36e5?"Waiting for the next update":"Not recorded")}</dd>`;
     if(s.peak)rows+=`<dt>Peak</dt><dd>${s.peak.toLocaleString()} viewers</dd>`;
     if(s.with&&s.with.length)rows+=`<dt>With</dt><dd>${s.with.map(n=>`<a href="${esc(twitchUrl(n))}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>`).join(", ")}</dd>`;
     h+=`<div class="entry">${chip}<h3>${esc(s.title)}</h3><dl>${rows}</dl>`;
