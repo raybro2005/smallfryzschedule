@@ -242,13 +242,16 @@
    "d": "2026-10-10",
    "start": "21:22",
    "dur": null,
-   "title": "41/100 t1 subs + late stream",
+   "title": "Cobblemon tourney day 1",
    "tags": [
-    "Just Chatting"
+    "Minecraft",
+    "Cobblemon",
+    "Tournament"
    ],
    "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
    "seen": "2026-10-10T21:35:56Z",
-   "peak": 29
+   "peak": 29,
+   "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs."
   }
  ],
  "events": [
@@ -260,8 +263,8 @@
   },
   {
    "from": "2026-10-10",
-   "note": "Community tournament announced for Saturday.",
-   "title": "Viewer tourney",
+   "note": "The viewer tourney he announced all week. Day 1 started on stream 10 Oct.",
+   "title": "Cobblemon tourney",
    "to": "2026-10-10"
   }
  ]
