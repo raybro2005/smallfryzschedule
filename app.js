@@ -161,13 +161,14 @@ function renderDetail(){
     const live=isLive(s), t=startDate(s);
     const chip=live?`<span class="chip live">Live now</span>`:s.planned?`<span class="chip stream">${s.unsure?"Planned · unconfirmed":"Planned"}</span>`:`<span class="chip stream">Streamed</span>`;
     let rows="";
-    if(t){const f=fmtTime(t);rows+=`<dt>Start</dt><dd>${f.main} <span class="mono" style="color:var(--muted)">· ${f.side}</span></dd>`}
-    else rows+=`<dt>Start</dt><dd>Time not announced</dd>`;
-    if(s.dur)rows+=`<dt>Length</dt><dd>${fmtDur(s.dur)}</dd>`;
-    else if(!s.planned)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:(Date.now()-t.getTime()<12*36e5?"Waiting for the next update":"Not recorded")}</dd>`;
+    /* start time and length only appear once the stream has actually started */
+    const started=!s.planned&&t&&t.getTime()<=Date.now();
+    if(started){const f=fmtTime(t);rows+=`<dt>Start</dt><dd>${f.main} <span class="mono" style="color:var(--muted)">· ${f.side}</span></dd>`}
+    if(started&&s.dur)rows+=`<dt>Length</dt><dd>${fmtDur(s.dur)}</dd>`;
+    else if(started)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:(Date.now()-t.getTime()<12*36e5?"Waiting for the next update":"Not recorded")}</dd>`;
     if(s.peak)rows+=`<dt>Peak</dt><dd>${s.peak.toLocaleString()} viewers</dd>`;
     if(s.with&&s.with.length)rows+=`<dt>With</dt><dd>${s.with.map(n=>`<a href="${esc(twitchUrl(n))}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>`).join(", ")}</dd>`;
-    h+=`<div class="entry">${chip}<h3>${esc(s.title)}</h3><dl>${rows}</dl>`;
+    h+=`<div class="entry">${chip}<h3>${esc(s.title)}</h3>${rows?`<dl>${rows}</dl>`:""}`;
     if(s.tags&&s.tags.length)h+=`<div class="tags">${s.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
     if(s.note)h+=`<p style="margin:0;font-size:.92rem">${esc(s.note)}</p>`;
     if(s.raw)h+=`<div class="rawtitle">Stream title: ${esc(s.raw)}</div>`;
