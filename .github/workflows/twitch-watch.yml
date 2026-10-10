@@ -1,0 +1,31 @@
+name: Twitch live watcher
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # every 5 minutes (GitHub may run it a few minutes late)
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: twitch-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - id: watch
+        run: node tools/twitch-watch.mjs
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+      - if: steps.watch.outputs.changed == 'true'
+        run: |
+          git config user.name "twitch-watch"
+          git config user.email "actions@users.noreply.github.com"
+          git add schedule.json
+          git commit -m "Live status: ${{ steps.watch.outputs.msg }}"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push && break; sleep 5; done
