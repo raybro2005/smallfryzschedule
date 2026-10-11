@@ -44,7 +44,7 @@ function cleanStream(o){
   if(!o||typeof o!=="object"||!validDate(o.d))return null;
   const title=str(o.title,140); if(!title)return null;
   const out={d:o.d,title,start:typeof o.start==="string"&&RX_TIME.test(o.start)?o.start:null,dur:int(o.dur,1,2880),
-    planned:o.planned===true,unsure:o.unsure===true};
+    planned:o.planned===true,unsure:o.unsure===true,source:o.source==="twitch"?"twitch":undefined};
   if(Array.isArray(o.tags))out.tags=o.tags.map(t=>str(t,40)).filter(Boolean).slice(0,8);
   if(Array.isArray(o.with))out.with=o.with.filter(n=>typeof n==="string"&&RX_TWITCH.test(n)).slice(0,10);
   const peak=int(o.peak,0,10000000); if(peak!==null)out.peak=peak;
@@ -127,7 +127,7 @@ function render(){
     cells.push({k:key(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()),day:d.getUTCDate(),inMonth:d.getUTCMonth()===view.m,col:i%7});
     if(i===34&&new Date(start.getTime()+35*864e5).getUTCMonth()!==view.m)break;
   }
-  let html="",streamed=0,upcoming=0,mins=0;
+  let html="",streamed=0,upcoming=0,mins=0,locked=0;
   cells.forEach((c,i)=>{
     const st=status(c.k), list=byDay[c.k]||[], evs=eventsOn(c.k);
     const prev=cells[i-1],next=cells[i+1];
@@ -154,10 +154,12 @@ function render(){
     inner+=`<span class="num">${c.day}</span>`;
     const label=`${c.k}: ${st==="stream"?list.map(s=>s.title).join(", "):st==="off"?"no stream":"no record"}${evs.length?", event: "+evs.map(e=>e.title).join(", "):""}`;
     html+=`<button class="${cls.join(" ")}" data-k="${c.k}" aria-label="${esc(label)}">${inner}</button>`;
-    if(c.inMonth){list.forEach(s=>{if(s.planned)upcoming++;else{streamed++;mins+=s.dur||0}})}
+    if(c.inMonth){list.forEach(s=>{if(s.planned)upcoming++;else{streamed++;mins+=s.dur||0;if(lockedIn(s.raw))locked++}})}
   });
   $("grid").innerHTML=html;
-  $("counts").textContent=loadState==="loading"?"Loading the schedule…":loadState==="offline"?"Schedule unavailable right now.":`${streamed} streamed · ${upcoming} planned · ${Math.round(mins/60)} hours live this month`;
+  $("counts").textContent=loadState==="loading"?"Loading the schedule…":loadState==="offline"?"Schedule unavailable right now.":`${streamed} streams · ${Math.round(mins/60)} hours of yappin · locked in on ${locked} of ${streamed}${upcoming?` · ${upcoming} coming up`:""}`;
+  {const latest=STREAMS.filter(x=>!x.planned&&subGoal(x.raw)&&Date.now()-Date.parse(x.d)<14*864e5).sort((x,y)=>y.sortAt-x.sortAt)[0];
+   $("headgoal").innerHTML=latest?meter(subGoal(latest.raw)).replace("sub goal","current sub goal"):"";}
   renderDetail();
   renderLive();
   renderUpdated();
@@ -170,13 +172,13 @@ function renderDetail(){
   let h=`<h2>${dateLabel}${k===todayKey?` <span class="todaytag">today</span>`:""}</h2>`;
   if(OCCASIONS[k])h+=`<span class="chip plain">${OCCASIONS[k].icon} ${OCCASIONS[k].label}</span> `;
   if(!list.length){
-    if(st==="off")h+=`<span class="chip off">No stream</span><p>He didn't go live this day.</p>`;
-    else if(st==="untracked")h+=`<span class="chip plain">No record</span><p>${loadState==="ready"?`This page starts on ${fmtShort(TRACKED_FROM)} ${TRACKED_FROM.slice(0,4)}, so nothing is logged for this day.`:"The schedule is still loading."}</p>`;
-    else h+=`<span class="chip plain">Nothing announced</span><p>No stream has been announced for this day yet. He usually goes live around 20:00–21:00 UTC.</p>`;
+    if(st==="off")h+=`<span class="chip off">Day off</span><p>No stream. Probably touching grass.</p>`;
+    else if(st==="untracked")h+=`<span class="chip plain">No record</span><p>${loadState==="ready"?`Before this site existed (it starts ${fmtShort(TRACKED_FROM)} ${TRACKED_FROM.slice(0,4)}), so there's no record.`:"The schedule is still loading."}</p>`;
+    else h+=`<span class="chip plain">Nothing yet</span><p>Nothing announced for this day yet. Check back, plans change fast round here.</p>`;
   }
   list.forEach(s=>{
     const live=isLive(s), t=startDate(s);
-    const chip=live?`<span class="chip live">Live now</span>`:s.planned?`<span class="chip stream">${s.unsure?"Planned · unconfirmed":"Planned"}</span>`:`<span class="chip stream">Streamed</span>`;
+    const chip=live?`<span class="chip live">Live now</span>`:s.planned?`<span class="chip stream">${s.unsure?"Rumoured (from his titles)":s.source==="twitch"?"On his Twitch schedule":"Planned"}</span>`:`<span class="chip stream">Streamed</span>`;
     let rows="";
     /* start time and length only appear once the stream has actually started */
     const started=!s.planned&&t&&t.getTime()<=Date.now();
@@ -185,19 +187,26 @@ function renderDetail(){
     else if(started)rows+=`<dt>${live?"Live for":"Length"}</dt><dd>${live?`<span class="livetimer mono" data-since="${t.getTime()}">${fmtElapsed(Date.now()-t.getTime())}</span>`:(Date.now()-t.getTime()<12*36e5?"Waiting for the next update":"Not recorded")}</dd>`;
     if(s.peak)rows+=`<dt>Peak</dt><dd>${s.peak.toLocaleString()} viewers</dd>`;
     if(s.with&&s.with.length)rows+=`<dt>With</dt><dd>${s.with.map(n=>`<a href="${esc(twitchUrl(n))}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>`).join(", ")}</dd>`;
-    h+=`<div class="entry">${chip}<h3>${esc(s.title)}</h3>${rows?`<dl>${rows}</dl>`:""}`;
+    const g=subGoal(s.raw);
+    h+=`<div class="entry">${chip}<h3>${esc(s.title)}${lockedIn(s.raw)?` <span class="stamp" title="He said it in the title">locked in</span>`:""}</h3>${rows?`<dl>${rows}</dl>`:""}`;
+    if(g)h+=meter(g);
     if(s.tags&&s.tags.length)h+=`<div class="tags">${s.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
-    if(s.note)h+=`<p style="margin:0;font-size:.92rem">${esc(s.note)}</p>`;
-    if(s.raw)h+=`<div class="rawtitle">Stream title: ${esc(s.raw)}</div>`;
+    const note=(s.note||"").replace(/\s*Sub goal in the title:[^.]*\.?/i,"").trim(); // the meter already shows it
+    if(note)h+=`<p style="margin:0;font-size:.92rem">${esc(note)}</p>`;
+    if(s.raw)h+=`<div class="chatline"><span class="chatname">SmallFryz</span><span class="rawtitle">${esc(s.raw)}</span></div>`;
     h+=`</div>`;
   });
   evs.forEach(e=>{
     const range=e.from===e.to?"One day":`${fmtShort(e.from)} – ${fmtShort(e.to)}`;
     h+=`<div class="entry"><span class="chip event">Event · ${range}</span><h3>${esc(e.title)}</h3>${e.note?`<p style="margin:0;font-size:.92rem">${esc(e.note)}</p>`:""}</div>`;
   });
-  h+=`<a class="watch" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">Watch on Twitch →</a>`;
+  h+=`<a class="watch" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">Pull up on Twitch →</a>`;
   $("detail").innerHTML=h;
 }
+/* bits pulled from his own titles */
+function subGoal(raw){const m=/(\d+)\s*\/\s*(\d+)\s*(?:T1|TIER\s*1)?\s*SUBS?/i.exec(raw||"");if(!m)return null;const cur=+m[1],goal=+m[2];return goal>0&&cur<=goal*2?{cur,goal}:null}
+const lockedIn=raw=>/LOCKED\s*IN/i.test(raw||"");
+function meter(g){const pct=Math.min(100,Math.round(g.cur/g.goal*100));return `<div class="subgoal"><div class="meter" role="img" aria-label="Sub goal ${g.cur} of ${g.goal}"><i style="width:${pct}%"></i></div><span>sub goal ${g.cur}/${g.goal}</span></div>`}
 function fmtShort(k){return new Date(k+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"UTC"})}
 
 /* ===== live timer: how long the current stream has been going, ticking every second ===== */
@@ -206,10 +215,10 @@ setInterval(()=>{document.querySelectorAll(".livetimer").forEach(el=>{const sinc
 function renderLive(){
   const live=STREAMS.find(isLive);
   $("livechip").classList.toggle("on",!!live);
-  if(live){$("livetext").innerHTML=`Live for <span class="livetimer" data-since="${startDate(live).getTime()}">${fmtElapsed(Date.now()-startDate(live).getTime())}</span>: ${esc(live.title)}`}
+  if(live){$("livetext").innerHTML=`LIVE · yappin for <span class="livetimer" data-since="${startDate(live).getTime()}">${fmtElapsed(Date.now()-startDate(live).getTime())}</span>`}
   else{
     const next=STREAMS.filter(s=>s.planned&&(s.k||s.d)>=todayKey).sort((a,b)=>a.sortAt-b.sortAt)[0];
-    $("livetext").textContent=loadState==="loading"?"Loading…":next?`Next: ${next.title}, ${fmtShort(next.k||next.d)}`:"Offline";
+    $("livetext").textContent=loadState==="loading"?"Loading…":next?`next stream: ${fmtShort(next.k||next.d)}${next.title&&next.title!=="Scheduled stream"?`, ${next.title}`:""}`:"offline (for now)";
   }
 }
 

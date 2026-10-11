@@ -2,7 +2,7 @@
 :root{
   --bg:#EEF5F3; --surface:#F9FCFB; --ink:#14323A; --muted:#58717A; --line:#CFE0DC;
   --stream:#F59E4B; --stream-ink:#4A2205; --off:#C9D5DF; --event:#CDBDF2; --event-ink:#3A2A6B;
-  --live:#E5484D; --accent:#1F7A8C;
+  --live:#E5484D; --stamp:#B42328; --accent:#1F7A8C;
   --f-display:"Shantell Sans","Comic Neue","Segoe Print",cursive;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -11,11 +11,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0C1D24; --surface:#122830; --ink:#E2EFEC; --muted:#8EA7AD; --line:#21404A;
   --stream:#E8893A; --stream-ink:#1C0C01; --off:#2A4452; --event:#4B3C7C; --event-ink:#E6DEFF;
-  --live:#FF6369; --accent:#5CC1D1; --past-blob:.85; color-scheme:dark }}
+  --live:#FF6369; --stamp:#FF8A8E; --accent:#5CC1D1; --past-blob:.85; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0C1D24; --surface:#122830; --ink:#E2EFEC; --muted:#8EA7AD; --line:#21404A;
   --stream:#E8893A; --stream-ink:#1C0C01; --off:#2A4452; --event:#4B3C7C; --event-ink:#E6DEFF;
-  --live:#FF6369; --accent:#5CC1D1; --past-blob:.85; color-scheme:dark }
+  --live:#FF6369; --stamp:#FF8A8E; --accent:#5CC1D1; --past-blob:.85; color-scheme:dark }
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1rem;line-height:1.5;padding-inline:16px;padding-block:0 112px}
@@ -206,3 +206,24 @@ legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-trans
 .updated{font-size:.8rem}
 .counts{font-size:.88rem}
 .legendrow .mono{font-family:var(--f-display)}
+
+/* ===== his personality, pulled from his titles ===== */
+/* "LOCKED IN" rubber stamp */
+.stamp{display:inline-block;vertical-align:middle;margin-left:4px;padding:2px 8px;border:2px solid var(--stamp);border-radius:4px;color:var(--stamp);
+  font-family:var(--f-mono);font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;transform:rotate(-4deg)}
+/* tags as slightly wonky stickers */
+.tag{border:1.5px solid var(--ink);background:var(--surface);box-shadow:2px 2px 0 color-mix(in srgb,var(--ink) 25%,transparent)}
+.tag:nth-child(odd){transform:rotate(-2deg)}
+.tag:nth-child(even){transform:rotate(1.5deg)}
+/* stream title shown like a chat message */
+.chatline{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;background:var(--bg);border-radius:12px 12px 12px 4px;padding:8px 12px;font-size:.85rem}
+.chatname{font-family:var(--f-display);font-weight:800;color:var(--accent)}
+.chatname::after{content:":"}
+.chatline .rawtitle{color:var(--ink);font-family:var(--f-body)}
+/* sub goal meter */
+.subgoal{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-size:.85rem;color:var(--muted)}
+.meter{flex:0 0 120px;height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--stream);border-radius:999px}
+.headgoal{width:100%;order:4}
+.headgoal:empty{display:none}
+@media (prefers-reduced-motion: reduce){.stamp,.tag{transform:none}}

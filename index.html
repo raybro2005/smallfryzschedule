@@ -23,6 +23,7 @@
     </a>
     <a class="livechip" id="livechip" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer"><span class="dot"></span><span id="livetext">Loading…</span></a>
     <div class="updated" id="updated"></div>
+    <div class="headgoal" id="headgoal"></div>
   </header>
 
   <main id="viewCalendar">
@@ -41,7 +42,7 @@
       <div class="grid" id="grid"></div>
       <div class="legendrow">
         <span><i class="sw" style="background:var(--stream)"></i>Stream</span>
-        <span><i class="sw" style="background:var(--off)"></i>No stream</span>
+        <span><i class="sw" style="background:var(--off)"></i>Day off</span>
         <span><i class="sw" style="background:var(--event);border-radius:999px;height:7px"></i>Event</span>
         <span><span class="mono" style="color:var(--accent)">✓</span>Happened</span>
         <span><span class="mono">?</span>Unsure</span>
@@ -53,11 +54,11 @@
   </div>
 
   <section class="guide">
-    <h2>Reading the calendar</h2>
+    <h2>How to read this (it's not that deep)</h2>
     <div>
       <h3>What a day can be</h3>
       <p><span class="demo"><i style="background:var(--stream)"></i><b style="color:var(--stream-ink)">12</b></span><strong>Stream.</strong> He went live, or a stream is on the books. Past streams fade a little so upcoming ones stand out.</p>
-      <p><span class="demo"><i style="background:var(--off);inset:10px 0"></i><b>12</b></span><strong>No stream.</strong> Nothing went out that day. Back-to-back days off join into one long blob.</p>
+      <p><span class="demo"><i style="background:var(--off);inset:10px 0"></i><b>12</b></span><strong>Day off.</strong> No stream that day. Back-to-back days off join into one long blob.</p>
       <p><span class="demo"><i style="background:var(--event);inset:auto 2px 4px;height:8px;border-radius:9px"></i><b>12</b></span><strong>Event.</strong> Something that runs across days, like a voting window or a viewer tourney. It sits under the numbers and can share a day with a stream.</p>
     </div>
     <div>
@@ -66,6 +67,7 @@
         <li><span class="mono" style="color:var(--accent)">✓</span> It happened as planned.</li>
         <li><span class="mono">?</span> Announced but not confirmed yet, or no start time given.</li>
         <li><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--live)"></span> Live at the last update.</li>
+        <li><span class="stamp">locked in</span> He called it in the stream title. Which is most days, to be fair.</li>
         <li>🎃 Holidays and special days get a sticker.</li>
         <li>Faded numbers with no blob are days this page has no record for yet.</li>
       </ul>
@@ -73,13 +75,13 @@
     <div>
       <h3>Times</h3>
       <p>The whole calendar follows your own time zone: each stream sits on the day it starts where you are, and its start time shows in your time with UTC beside it. Open Settings (the sun button) to see everything in UTC instead.</p>
-      <p>He usually goes live around 20:00–21:00 UTC (that's afternoon in North America and late evening in Europe) and streams four to six hours. Click any day for the title, collab partners and peak viewers.</p>
+      <p>He usually goes live around 20:00–21:00 UTC (that's afternoon in North America and late evening in Europe) and streams four to six hours. Click any day for the title, sub goal, collab partners and peak viewers.</p>
     </div>
   </section>
   </main>
 
   <footer>
-    <p>Fan-made, not affiliated with SmallFryz or Twitch. The schedule refreshes every few hours from his public stream history. Upcoming days come from what he announces in stream titles, so treat them as likely, not promised.</p>
+    <p>Fan-made by someone in chat. Not affiliated with SmallFryz or Twitch. It checks Twitch every 5 minutes. Upcoming days come from his Twitch schedule and what he says in his titles, so treat them as likely, not promised.</p>
     <p>All content and credit goes to <a href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">SmallFryz</a>. Layout idea borrowed from ludwigschedule.com.</p>
     <p class="credit">Site created by Raybro.</p>
   </footer>
