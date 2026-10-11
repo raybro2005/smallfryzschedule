@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-11T21:00:15Z",
+ "updatedAt": "2026-10-11T21:20:11Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -251,6 +251,18 @@
    "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
    "peak": 82,
    "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs."
+  },
+  {
+   "d": "2026-10-11",
+   "start": "21:19",
+   "dur": null,
+   "title": "45/100 t1 subs + late stream",
+   "tags": [
+    "Just Chatting"
+   ],
+   "raw": "🧟 45/100 T1 SUBS 🧟 LATE STREAM 🧟 THE RESIDENTS ARE EVIL 🧟MAYBE DISCORD 🧟 YIPPIN AND YAPPIN 🧟 LOCKED IN 🧟",
+   "seen": "2026-10-11T21:20:11Z",
+   "peak": 0
   },
   {
    "d": "2026-10-12",
