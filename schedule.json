@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-10T23:44:44Z",
+ "updatedAt": "2026-10-11T00:02:52Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -241,7 +241,7 @@
   {
    "d": "2026-10-10",
    "start": "21:22",
-   "dur": null,
+   "dur": 161,
    "title": "Cobblemon tourney day 1",
    "tags": [
     "Minecraft",
@@ -249,7 +249,6 @@
     "Tournament"
    ],
    "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
-   "seen": "2026-10-10T23:44:44Z",
    "peak": 82,
    "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs."
   }
