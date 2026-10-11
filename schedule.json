@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-11T04:35:51Z",
+ "updatedAt": "2026-10-11T20:00:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -251,16 +251,6 @@
    "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
    "peak": 82,
    "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs."
-  },
-  {
-   "d": "2026-10-11",
-   "start": "20:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
   },
   {
    "d": "2026-10-12",
