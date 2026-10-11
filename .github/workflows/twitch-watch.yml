@@ -13,10 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
+      - uses: actions/checkout@v5   # the runner already has Node, so no setup step
       - name: Check Twitch (keeps checking every 3 minutes while he is live)
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
@@ -29,10 +26,8 @@ jobs:
           while :; do
             git pull --rebase -q origin main
             node tools/twitch-watch.mjs
-            live=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).live)")
-            changed=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).changed)")
+            IFS=$'\t' read -r live changed msg < <(node -e "const s=JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8'));console.log([s.live,s.changed,s.msg||''].join('\t'))")
             if [ "$changed" = "true" ]; then
-              msg=$(node -e "console.log(JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8')).msg)")
               git add schedule.json
               git commit -q -m "Live status: $msg"
               for i in 1 2 3; do git pull --rebase -q origin main && git push -q && break; sleep 5; done

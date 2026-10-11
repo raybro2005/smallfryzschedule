@@ -211,7 +211,7 @@ function fmtShort(k){return new Date(k+"T12:00:00Z").toLocaleDateString("en-GB",
 
 /* ===== live timer: how long the current stream has been going, ticking every second ===== */
 function fmtElapsed(ms){const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),sec=t%60;return `${h}:${pad(m)}:${pad(sec)}`}
-setInterval(()=>{document.querySelectorAll(".livetimer").forEach(el=>{const since=Number(el.dataset.since);if(since)el.textContent=fmtElapsed(Date.now()-since)})},1000);
+setInterval(()=>{if(document.hidden)return;document.querySelectorAll(".livetimer").forEach(el=>{const since=Number(el.dataset.since);if(since)el.textContent=fmtElapsed(Date.now()-since)})},1000);
 function renderLive(){
   const live=STREAMS.find(isLive);
   $("livechip").classList.toggle("on",!!live);
@@ -244,11 +244,15 @@ function renderUpdated(){
   $("updated").textContent=[upd,`Days and times shown in ${zone}`].filter(Boolean).join(" · ");
 }
 
+let lastScheduleText="";
 async function loadSchedule(){
   try{
-    const res=await fetch("schedule.json",{cache:"no-store",credentials:"omit"});
+    const res=await fetch("schedule.json",{cache:"no-cache",credentials:"omit"}); // revalidates; unchanged file costs a tiny 304
     if(!res.ok)throw new Error(res.status);
-    const j=await res.json();
+    const text=await res.text();
+    if(text===lastScheduleText&&loadState==="ready"){renderUpdated();return} // nothing new, skip the redraw
+    lastScheduleText=text;
+    const j=JSON.parse(text);
     if(!j||typeof j!=="object")throw new Error("bad data");
     STREAMS=(Array.isArray(j.streams)?j.streams:[]).slice(0,1000).map(cleanStream).filter(Boolean);
     EVENTS=(Array.isArray(j.events)?j.events:[]).slice(0,200).map(cleanEvent).filter(Boolean);
@@ -258,8 +262,10 @@ async function loadSchedule(){
   render();
 }
 loadSchedule();
-setInterval(loadSchedule,5*60000);
-setInterval(()=>{if(refreshToday())render();else{renderLive();renderUpdated()}},60000);
+setInterval(()=>{if(!document.hidden)loadSchedule()},5*60000);
+setInterval(()=>{if(document.hidden)return;if(refreshToday())render();else{renderLive();renderUpdated()}},60000);
+/* background tabs do nothing; catch up as soon as the tab is visible again */
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadSchedule();if(refreshToday())render()}});
 
 /* ===== events ===== */
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".day");if(!b)return;selected=b.dataset.k;

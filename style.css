@@ -1,3 +1,8 @@
+/* fonts are served from this site (trimmed to the characters it uses) */
+@font-face{font-family:"Shantell Sans";src:url(fonts/shantell-sans.woff2) format("woff2");font-weight:300 800;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/jetbrains-mono-500.woff2) format("woff2");font-weight:400 500;font-display:swap}
 /* Layout: a fan-made month — painted day blobs on aqua paper, a detail card beside the grid, a field guide below. */
 :root{
   --bg:#EEF5F3; --surface:#F9FCFB; --ink:#14323A; --muted:#58717A; --line:#CFE0DC;
@@ -88,7 +93,6 @@ h1 small{display:block;font-family:var(--f-mono);font-weight:500;font-size:.95re
 .detail{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
 @media (max-width:860px){.detail{position:static}}
 .detail h2{font-family:var(--f-display);font-weight:800;font-size:1.5rem;margin:0 0 4px;line-height:1.15}
-.eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .chip{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:700;font-size:.78rem;margin-block:8px}
 .chip.stream{background:var(--stream);color:var(--stream-ink)}
 .chip.off{background:var(--off)}
@@ -108,9 +112,6 @@ dd{margin:0;font-variant-numeric:tabular-nums}
 .watch{display:inline-block;margin-top:16px;font-weight:700}
 
 /* settings */
-.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
-.seg button{background:none;border:0;padding:4px 12px;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--accent);color:var(--bg);font-weight:700}
 
 /* guide */
 .guide{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px}
