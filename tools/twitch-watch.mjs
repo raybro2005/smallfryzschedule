@@ -16,19 +16,37 @@ const ymd = d => iso(d).slice(0, 10);
 const hm = d => iso(d).slice(11, 16);
 const mins = (a, b) => Math.round((b - a) / 60000);
 
+let TOKEN = null;
+async function helix(path) {
+  if (!TOKEN) {
+    const tok = await fetch("https://id.twitch.tv/oauth2/token", {
+      method: "POST",
+      body: new URLSearchParams({ client_id: id, client_secret: secret, grant_type: "client_credentials" }),
+    });
+    if (!tok.ok) throw new Error("Twitch token request failed: " + tok.status);
+    TOKEN = (await tok.json()).access_token;
+  }
+  return fetch("https://api.twitch.tv/helix/" + path, { headers: { "Client-Id": id, Authorization: "Bearer " + TOKEN } });
+}
 async function twitch() {
-  const tok = await fetch("https://id.twitch.tv/oauth2/token", {
-    method: "POST",
-    body: new URLSearchParams({ client_id: id, client_secret: secret, grant_type: "client_credentials" }),
-  });
-  if (!tok.ok) throw new Error("Twitch token request failed: " + tok.status);
-  const { access_token } = await tok.json();
-  const res = await fetch(`https://api.twitch.tv/helix/streams?user_login=${LOGIN}`, {
-    headers: { "Client-Id": id, Authorization: "Bearer " + access_token },
-  });
+  const res = await helix(`streams?user_login=${LOGIN}`);
   if (!res.ok) throw new Error("Twitch streams request failed: " + res.status);
   const { data } = await res.json();
   return data && data[0] ? data[0] : null;   // null = offline
+}
+// His posted Twitch schedule (the "Schedule" tab on his channel). Returns [] if none is posted, null if it couldn't be read.
+async function twitchSchedule() {
+  try {
+    const u = await helix(`users?login=${LOGIN}`);
+    if (!u.ok) return null;
+    const user = (await u.json()).data?.[0]; if (!user) return null;
+    const r = await helix(`schedule?broadcaster_id=${user.id}&first=25`);
+    if (r.status === 404) return [];          // no schedule posted
+    if (!r.ok) return null;
+    const body = await r.json();
+    const vac = body.data?.vacation;
+    return (body.data?.segments || []).filter(seg => !seg.canceled_until).map(seg => ({ ...seg, vacation: vac }));
+  } catch { return null; }
 }
 
 // Plain-text cleanup of a raw Twitch title for the short "title" field.
@@ -84,6 +102,37 @@ if (live) {
 }
 
 const STATE = process.env.WATCH_STATE || "/dev/null";
+// ---- upcoming streams from his Twitch schedule ----
+const segs = await twitchSchedule();
+if (segs) {
+  const horizon = new Date(now.getTime() + 21 * 864e5);       // look three weeks ahead
+  const wanted = new Map();
+  for (const seg of segs) {
+    const st = new Date(seg.start_time);
+    if (st <= now || st > horizon) continue;
+    const day = ymd(st);
+    if (wanted.has(day)) continue;                              // one entry per day
+    wanted.set(day, {
+      d: day, start: hm(st), dur: null, planned: true, source: "twitch",
+      title: seg.title ? cleanTitle(seg.title) : "Scheduled stream",
+      tags: seg.category?.name ? [seg.category.name] : [],
+      note: "From his Twitch schedule.",
+      ...(seg.title ? { raw: stripCommands(seg.title) } : {}),
+    });
+  }
+  const realDays = new Set(j.streams.filter(x => !x.planned).map(x => x.d));
+  const before = JSON.stringify(j.streams);
+  j.streams = j.streams.filter(x => {
+    if (!x.planned) return true;
+    if (wanted.has(x.d)) return false;                          // official entry replaces any guess for that day
+    if (x.source === "twitch") return false;                    // dropped or cancelled on Twitch, or already happened
+    return true;
+  });
+  for (const [day, entry] of wanted) if (!realDays.has(day)) j.streams.push(entry);
+  if (JSON.stringify(j.streams) !== before) { important = true; note = note || `Twitch schedule: ${wanted.size} upcoming`; }
+  summary(wanted.size ? `Twitch schedule: **${wanted.size}** upcoming stream(s) in the next 3 weeks.` : "Twitch schedule: nothing posted for the next 3 weeks.");
+} else summary("Twitch schedule: couldn't be read this time.");
+
 if (!important) { writeFileSync(STATE, JSON.stringify({ live: !!live, changed: false })); console.log(live ? "Live, nothing new to save yet." : "Offline, nothing to update."); process.exit(0); }
 j.updatedAt = iso(now);
 j.streams.sort((a, b) => (a.d + (a.start || "99")).localeCompare(b.d + (b.start || "99")));
