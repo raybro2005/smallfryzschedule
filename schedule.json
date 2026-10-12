@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-12T02:40:42Z",
+ "updatedAt": "2026-10-12T02:46:46Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -255,13 +255,12 @@
   {
    "d": "2026-10-11",
    "start": "21:19",
-   "dur": null,
+   "dur": 328,
    "title": "45/100 t1 subs + late stream",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🧟 45/100 T1 SUBS 🧟 LATE STREAM 🧟 THE RESIDENTS ARE EVIL 🧟MAYBE DISCORD 🧟 YIPPIN AND YAPPIN 🧟 LOCKED IN 🧟",
-   "seen": "2026-10-12T02:40:42Z",
    "peak": 99
   },
   {
