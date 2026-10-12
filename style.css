@@ -264,3 +264,7 @@ legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-trans
 .byline{width:100%;order:5;font-family:var(--f-display);font-size:1rem;color:var(--muted);transform:rotate(-1deg)}
 .byline b{color:var(--ink)}
 @media (max-width:600px){}
+
+/* guide text in the handwritten face, to match its headings */
+.guide p,.guide li{font-family:var(--f-display);font-weight:400;line-height:1.55}
+.guide strong{font-weight:700}
