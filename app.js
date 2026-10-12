@@ -169,7 +169,7 @@ function renderDetail(){
   const k=selected, list=byDay[k]||[], evs=eventsOn(k), st=status(k);
   const d=new Date(k+"T12:00:00Z");
   const dateLabel=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",timeZone:"UTC"});
-  let h=`<h2>${dateLabel}${k===todayKey?` <span class="todaytag">today</span>`:""}</h2>`;
+  let h=`<h2>${dateLabel}${k===todayKey?` <span class="todaytag">${prefs.tz==="utc"?"today in UTC":"today"}</span>`:""}</h2>`;
   if(OCCASIONS[k])h+=`<span class="chip plain">${OCCASIONS[k].icon} ${OCCASIONS[k].label}</span> `;
   if(!list.length){
     if(st==="off")h+=`<span class="chip off">Day off</span><p>No stream. Probably touching grass.</p>`;
