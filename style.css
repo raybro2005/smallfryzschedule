@@ -228,3 +228,45 @@ legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-trans
 .headgoal{width:100%;order:4}
 .headgoal:empty{display:none}
 @media (prefers-reduced-motion: reduce){.stamp,.tag{transform:none}}
+
+/* ===== hand-made look: wobbly outlines, scribbled today, taped note, highlighter labels, doodles ===== */
+:root{--tape:rgba(233,214,150,.75)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tape:rgba(200,180,120,.45)}}
+
+/* 2. wobbly marker outlines instead of perfect boxes */
+.cal,.detail{border:0!important;position:relative}
+.cal::after,.detail::after,.nav button::after,.livechip::after,.tab::after{content:"";position:absolute;inset:0;border:2px solid var(--ink);
+  border-radius:18px 26px 16px 24px / 22px 16px 26px 18px;filter:url(#rough);pointer-events:none}
+.nav button,.livechip,.tab{position:relative;border-color:transparent!important;box-shadow:none!important;border-radius:14px 10px 16px 12px!important}
+.tab::after{border-width:2.5px}
+
+/* today: a pen scribble instead of a dashed ring */
+.day.today::before{content:"";position:absolute;inset:-2%;z-index:4;background:var(--accent);
+  -webkit-mask:url(doodles/scribble.svg) center/contain no-repeat;mask:url(doodles/scribble.svg) center/contain no-repeat;pointer-events:none}
+.day.today.sel::after{display:none}
+
+/* 3. the day panel is a note taped on */
+.detail{transform:rotate(-1.2deg);overflow:visible}
+.detail::before{content:"";position:absolute;top:-14px;left:50%;width:120px;height:28px;z-index:2;transform:translateX(-50%) rotate(3deg);
+  background:var(--tape);clip-path:polygon(2% 8%,98% 0,100% 92%,0 100%)}
+.legendrow{border-top:0!important;transform:rotate(.6deg)}
+
+/* 7. labels as highlighter marks, not pills */
+.chip{background:none!important;border:0!important;border-radius:0;padding:0 4px;font-family:var(--f-display);font-size:1rem;color:var(--ink)!important;
+  background-image:linear-gradient(transparent 50%,var(--hl,var(--stream)) 50%,var(--hl,var(--stream)) 88%,transparent 88%)!important}
+.chip.event{--hl:var(--event)} .chip.off{--hl:var(--off)} .chip.live{--hl:var(--live)} .chip.plain{--hl:var(--line)}
+
+/* 1. placeholder doodles behind empty days (your drawings would go here) */
+.doodle{position:absolute;inset:22%;z-index:0;opacity:.16;background:var(--ink);pointer-events:none;
+  -webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+
+/* 5. your voice */
+.byline{width:100%;order:5;font-family:var(--f-display);font-size:1rem;color:var(--muted);transform:rotate(-1deg)}
+.byline b{color:var(--ink)}
+.whatsnew{margin-top:40px;max-width:420px;padding:20px 24px;position:relative;transform:rotate(1deg)}
+.whatsnew::after{content:"";position:absolute;inset:0;border:2px solid var(--ink);border-radius:16px 22px 18px 26px;filter:url(#rough);pointer-events:none}
+.whatsnew h2{font-family:var(--f-display);margin:0 0 8px;font-size:1.4rem}
+.whatsnew ul{margin:0;padding-left:1.1em;font-family:var(--f-display)}
+.whatsnew li{margin-bottom:4px}
+.whatsnew small{color:var(--muted)}
+@media (max-width:600px){}

@@ -151,6 +151,8 @@ function render(){
     else if(list.some(s=>s.unsure))inner+=`<span class="mark unsure" title="Unsure">?</span>`;
     else if(st==="stream"&&c.k<todayKey)inner+=`<span class="mark ok" title="Happened">✓</span>`;
     if(OCCASIONS[c.k])inner+=`<span class="sticker" title="${OCCASIONS[c.k].label}">${OCCASIONS[c.k].icon}</span>`;
+    if((st==="untracked"||st==="unknown")&&c.inMonth&&!evs.length&&hash(c.k+"d")%3===0)
+      inner+=`<span class="doodle" style="--src:url(${DOODLES[hash(c.k)%DOODLES.length]})"></span>`;
     inner+=`<span class="num">${c.day}</span>`;
     const label=`${c.k}: ${st==="stream"?list.map(s=>s.title).join(", "):st==="off"?"no stream":"no record"}${evs.length?", event: "+evs.map(e=>e.title).join(", "):""}`;
     html+=`<button class="${cls.join(" ")}" data-k="${c.k}" aria-label="${esc(label)}">${inner}</button>`;
@@ -203,6 +205,8 @@ function renderDetail(){
   h+=`<a class="watch" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">Pull up on Twitch →</a>`;
   $("detail").innerHTML=h;
 }
+/* faint doodles behind some empty days (swap these files for real drawings) */
+const DOODLES=["doodles/controller.svg","doodles/ball.svg","doodles/zzz.svg"];
 /* bits pulled from his own titles */
 function subGoal(raw){const m=/(\d+)\s*\/\s*(\d+)\s*(?:T1|TIER\s*1)?\s*SUBS?/i.exec(raw||"");if(!m)return null;const cur=+m[1],goal=+m[2];return goal>0&&cur<=goal*2?{cur,goal}:null}
 const lockedIn=raw=>/LOCKED\s*IN/i.test(raw||"");
