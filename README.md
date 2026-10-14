@@ -1,7 +1,7 @@
-# SmallFryz Schedule
+# SmallFryz  stream Schedule Tracker
 
-Fan made calendar of SmallFryz's Twitch streams
-showcases when he's live
+Fan made stream calendar of SmallFryz's Twitch streams, to replace milanote
+showcases when he's live, when he's off.
 
 - `index.html`, `style.css`, `app.js`: the site
 - `schedule.json`: all streams and events (times in UTC). Edit this file to change the schedule.
