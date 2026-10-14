@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-13T21:26:08Z",
+ "updatedAt": "2026-10-14T20:00:16Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -264,16 +264,6 @@
    "raw": "🧟 45/100 T1 SUBS 🧟 LATE STREAM 🧟 THE RESIDENTS ARE EVIL 🧟MAYBE DISCORD 🧟 YIPPIN AND YAPPIN 🧟 LOCKED IN 🧟",
    "peak": 99,
    "note": "Late stream. Sub goal in the title: 45/100 tier 1 subs."
-  },
-  {
-   "d": "2026-10-14",
-   "start": "20:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
   },
   {
    "d": "2026-10-16",
