@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-14T20:00:16Z",
+ "updatedAt": "2026-10-14T21:00:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -266,6 +266,18 @@
    "note": "Late stream. Sub goal in the title: 45/100 tier 1 subs."
   },
   {
+   "d": "2026-10-14",
+   "start": "20:58",
+   "dur": null,
+   "title": "53/100 t1 subs + late stream",
+   "tags": [
+    "Just Chatting"
+   ],
+   "raw": "⚔️ 53/100 T1 SUBS ⚔️ LATE STREAM ⚔️ MINI DISCORD ⚔️ DARK SOULS 3 ⚔️ YIPPIN AND YAPPIN ⚔️ ELDEN RING MAYBE ⚔️",
+   "seen": "2026-10-14T21:00:15Z",
+   "peak": 55
+  },
+  {
    "d": "2026-10-16",
    "start": "20:00",
    "dur": null,
@@ -397,6 +409,16 @@
   },
   {
    "d": "2026-11-02",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-11-04",
    "start": "21:00",
    "dur": null,
    "planned": true,
