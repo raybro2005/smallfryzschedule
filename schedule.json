@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-15T01:01:49Z",
+ "updatedAt": "2026-10-15T01:16:55Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -268,13 +268,12 @@
   {
    "d": "2026-10-14",
    "start": "20:58",
-   "dur": null,
+   "dur": 259,
    "title": "53/100 t1 subs + late stream",
    "tags": [
     "Just Chatting"
    ],
    "raw": "⚔️ 53/100 T1 SUBS ⚔️ LATE STREAM ⚔️ MINI DISCORD ⚔️ DARK SOULS 3 ⚔️ YIPPIN AND YAPPIN ⚔️ ELDEN RING MAYBE ⚔️",
-   "seen": "2026-10-15T01:01:49Z",
    "peak": 123
   },
   {
