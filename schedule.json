@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-16T01:59:51Z",
+ "updatedAt": "2026-10-16T18:50:14Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -289,13 +289,15 @@
   },
   {
    "d": "2026-10-16",
-   "start": "20:00",
+   "start": "18:45",
    "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
+   "title": "The streamer awards announcment stream + hidden gem reveal",
+   "tags": [
+    "The Streamer Awards"
+   ],
+   "raw": "💎THE STREAMER AWARDS ANNOUNCMENT STREAM💎 HIDDEN GEM REVEAL💎GET IN HERE 💎",
+   "seen": "2026-10-16T18:50:14Z",
+   "peak": 1
   },
   {
    "d": "2026-10-17",
