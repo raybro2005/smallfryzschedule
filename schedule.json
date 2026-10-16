@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-16T01:53:48Z",
+ "updatedAt": "2026-10-16T01:59:51Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -279,13 +279,12 @@
   {
    "d": "2026-10-15",
    "start": "21:50",
-   "dur": null,
+   "dur": 250,
    "title": "59/100 t1 subs + short reacts",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💸 59/100 T1 SUBS 💸 SHORT REACTS 💸FRIENDSLOP💸BIG DAY TOMORROW💸YIPPIN AND YAPPIN 💸",
-   "seen": "2026-10-16T01:53:48Z",
    "peak": 63
   },
   {
