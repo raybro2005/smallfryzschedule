@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-17T20:30:38Z",
+ "updatedAt": "2026-10-17T21:00:50Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -307,7 +307,7 @@
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎MC PRACTICE w/ @NotSoulsLive 💎 HORROR GAMES w/ COCHARD AND JSHOCK💎",
-   "seen": "2026-10-17T20:30:38Z",
+   "seen": "2026-10-17T21:00:50Z",
    "peak": 100
   },
   {
@@ -442,6 +442,16 @@
   },
   {
    "d": "2026-11-06",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-11-07",
    "start": "21:00",
    "dur": null,
    "planned": true,
