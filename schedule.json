@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-17T00:49:41Z",
+ "updatedAt": "2026-10-17T01:16:52Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -290,13 +290,12 @@
   {
    "d": "2026-10-16",
    "start": "18:45",
-   "dur": null,
+   "dur": 392,
    "title": "The streamer awards announcment stream + hidden gem reveal",
    "tags": [
     "The Streamer Awards"
    ],
    "raw": "💎THE STREAMER AWARDS ANNOUNCMENT STREAM💎 HIDDEN GEM REVEAL💎GET IN HERE 💎",
-   "seen": "2026-10-17T00:49:41Z",
    "peak": 4695
   },
   {
