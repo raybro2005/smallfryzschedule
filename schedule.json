@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-18T00:17:09Z",
+ "updatedAt": "2026-10-18T00:29:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -301,13 +301,12 @@
   {
    "d": "2026-10-17",
    "start": "19:29",
-   "dur": null,
+   "dur": 300,
    "title": "!vote + hidden gem",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎MC PRACTICE w/ @NotSoulsLive 💎 HORROR GAMES w/ COCHARD AND JSHOCK💎",
-   "seen": "2026-10-18T00:17:09Z",
    "peak": 153
   },
   {
