@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-19T00:19:32Z",
+ "updatedAt": "2026-10-19T00:34:38Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -312,13 +312,12 @@
   {
    "d": "2026-10-18",
    "start": "20:13",
-   "dur": null,
+   "dur": 262,
    "title": "!vote + hidden gem",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 REACTS💎YAPPING💎THANKFUL💎 HIDDEN GEM CAMPAIGNING 💎",
-   "seen": "2026-10-19T00:19:32Z",
    "peak": 201
   },
   {
