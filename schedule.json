@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-21T20:00:16Z",
+ "updatedAt": "2026-10-21T21:00:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -463,6 +463,16 @@
   },
   {
    "d": "2026-11-09",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-11-11",
    "start": "21:00",
    "dur": null,
    "planned": true,
