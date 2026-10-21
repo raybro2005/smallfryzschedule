@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-20T00:18:24Z",
+ "updatedAt": "2026-10-21T20:00:16Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -330,16 +330,6 @@
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 RESIDENT EVIL VILLAGE💎FIRST PLAUTHROUGH💎 SHORT STREAM💎HIDDEN GEM CAMPAIGNING 💎",
    "peak": 100
-  },
-  {
-   "d": "2026-10-21",
-   "start": "20:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
   },
   {
    "d": "2026-10-23",
