@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-22T01:08:38Z",
+ "updatedAt": "2026-10-22T01:32:46Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -334,13 +334,12 @@
   {
    "d": "2026-10-21",
    "start": "21:07",
-   "dur": null,
+   "dur": 266,
    "title": "!vote + cooper stream",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🐈!VOTE🐈COOPER STREAM🐈GET IN HERE🐈HIDDEN GEM NOMINEE🐈 LOCKED IN🐈",
-   "seen": "2026-10-22T01:08:38Z",
    "peak": 232
   },
   {
