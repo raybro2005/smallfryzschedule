@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-23T20:45:25Z",
+ "updatedAt": "2026-10-23T21:00:32Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -362,7 +362,7 @@
     "Grand Theft Auto V"
    ],
    "raw": "💎!VOTE💎GTA V STORY MODE💎YIPPIN AND YAPPIN💎HIDDEN GEM NOMINEE💎LOCKED IN💎",
-   "seen": "2026-10-23T20:45:25Z",
+   "seen": "2026-10-23T21:00:32Z",
    "peak": 49
   },
   {
@@ -497,6 +497,16 @@
   },
   {
    "d": "2026-11-11",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-11-13",
    "start": "21:00",
    "dur": null,
    "planned": true,
