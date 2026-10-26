@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-26T00:00:51Z",
+ "updatedAt": "2026-10-26T00:09:55Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -367,13 +367,12 @@
   {
    "d": "2026-10-25",
    "start": "17:50",
-   "dur": null,
+   "dur": 380,
    "title": "!vote + 1000 minecraft tourney!",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎$1000 MINECRAFT TOURNEY!💎WINNING IT ALL (killed feinberg btw)💎HIDDEN GEM NOMINEE💎EARLIEST STREAM OF ALL TIME💎",
-   "seen": "2026-10-26T00:00:51Z",
    "peak": 101
   },
   {
