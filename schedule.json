@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-27T00:29:24Z",
+ "updatedAt": "2026-10-27T00:35:28Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -378,13 +378,12 @@
   {
    "d": "2026-10-26",
    "start": "21:38",
-   "dur": null,
+   "dur": 177,
    "title": "!vote + unban requests",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎UNBAN REQUESTS💎REACTS💎HIDDEN GEM NOMINEE💎SHORT STREAM💎",
-   "seen": "2026-10-27T00:29:24Z",
    "peak": 127
   },
   {
