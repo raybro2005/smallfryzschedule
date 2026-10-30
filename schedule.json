@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-30T21:00:17Z",
+ "updatedAt": "2026-10-30T22:15:18Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -396,6 +396,18 @@
    ],
    "raw": "💎!VOTE💎SHORT HORROR FILMS💎RESIDENT EVIL VIII💎HIDDEN GEM NOMINEE💎WE ARE BACK💎",
    "peak": 283
+  },
+  {
+   "d": "2026-10-30",
+   "start": "22:13",
+   "dur": null,
+   "title": "!vote + last day to vote",
+   "tags": [
+    "Just Chatting"
+   ],
+   "raw": "💎!VOTE💎LAST DAY TO VOTE💎HIDDEN GEM CAMPAIGN 2026💎HIDDEN GEM NOMINEE💎",
+   "seen": "2026-10-30T22:15:18Z",
+   "peak": 35
   },
   {
    "d": "2026-10-31",
