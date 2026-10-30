@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-30T00:32:01Z",
+ "updatedAt": "2026-10-30T00:38:05Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -389,13 +389,12 @@
   {
    "d": "2026-10-29",
    "start": "20:10",
-   "dur": null,
+   "dur": 268,
    "title": "!vote + short horror films",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎SHORT HORROR FILMS💎RESIDENT EVIL VIII💎HIDDEN GEM NOMINEE💎WE ARE BACK💎",
-   "seen": "2026-10-30T00:32:01Z",
    "peak": 283
   },
   {
