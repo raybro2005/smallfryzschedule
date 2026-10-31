@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-31T02:01:43Z",
+ "updatedAt": "2026-10-31T02:10:48Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -400,13 +400,12 @@
   {
    "d": "2026-10-30",
    "start": "22:13",
-   "dur": null,
+   "dur": 238,
    "title": "!vote + last day to vote",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎HIDDEN GEM CAMPAIGN 2026💎HIDDEN GEM NOMINEE💎",
-   "seen": "2026-10-31T02:01:43Z",
    "peak": 165
   },
   {
