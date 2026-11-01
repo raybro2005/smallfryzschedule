@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-01T00:46:08Z",
+ "updatedAt": "2026-11-01T01:01:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -411,13 +411,12 @@
   {
    "d": "2026-10-31",
    "start": "22:41",
-   "dur": null,
+   "dur": 140,
    "title": "!vote + last day to vote",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎GIVEAWAY STREAM💎COSTUME💎PUMPKIN CARVING💎",
-   "seen": "2026-11-01T00:46:08Z",
    "peak": 117
   },
   {
