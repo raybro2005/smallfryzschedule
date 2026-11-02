@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02T20:50:29Z",
+ "updatedAt": "2026-11-02T21:02:34Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -428,8 +428,8 @@
     "Just Chatting"
    ],
    "raw": "🎃CHAT MUSIC REACAP🎃AUX BATTLES🎃HALLOWEEN COSTUME REVIEW🎃AMERICA ARC SOON🎃",
-   "seen": "2026-11-02T20:50:29Z",
-   "peak": 99
+   "seen": "2026-11-02T21:02:34Z",
+   "peak": 104
   },
   {
    "d": "2026-11-04",
@@ -563,6 +563,16 @@
   },
   {
    "d": "2026-11-22",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-11-23",
    "start": "21:00",
    "dur": null,
    "planned": true,
