@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-08T01:49:30Z",
+ "updatedAt": "2026-11-08T17:37:57Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -291,7 +291,7 @@
    "d": "2026-10-16",
    "start": "18:45",
    "dur": 392,
-   "title": "The streamer awards announcment stream + hidden gem reveal",
+   "title": "Streamer Awards announcement + Hidden Gem reveal",
    "tags": [
     "The Streamer Awards"
    ],
@@ -302,141 +302,158 @@
    "d": "2026-10-17",
    "start": "19:29",
    "dur": 300,
-   "title": "!vote + hidden gem",
+   "title": "Minecraft practice + horror games",
    "tags": [
-    "Just Chatting"
+    "Minecraft",
+    "Horror"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎MC PRACTICE w/ @NotSoulsLive 💎 HORROR GAMES w/ COCHARD AND JSHOCK💎",
-   "peak": 153
+   "peak": 153,
+   "with": [
+    "NotSoulsLive"
+   ],
+   "note": "Horror games with Cochard and JShock. Hidden Gem campaigning."
   },
   {
    "d": "2026-10-18",
    "start": "20:13",
    "dur": 262,
-   "title": "!vote + hidden gem",
+   "title": "Reacts and yapping",
    "tags": [
-    "Just Chatting"
+    "Reacts"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 REACTS💎YAPPING💎THANKFUL💎 HIDDEN GEM CAMPAIGNING 💎",
-   "peak": 201
+   "peak": 201,
+   "note": "Hidden Gem campaigning."
   },
   {
    "d": "2026-10-19",
    "start": "21:03",
    "dur": 195,
-   "title": "!vote + hidden gem",
+   "title": "Resident Evil Village, first playthrough",
    "tags": [
-    "Just Chatting"
+    "Resident Evil Village"
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 RESIDENT EVIL VILLAGE💎FIRST PLAUTHROUGH💎 SHORT STREAM💎HIDDEN GEM CAMPAIGNING 💎",
-   "peak": 100
+   "peak": 100,
+   "note": "Short stream. Hidden Gem campaigning."
   },
   {
    "d": "2026-10-21",
    "start": "21:07",
    "dur": 266,
-   "title": "!vote + cooper stream",
+   "title": "Cooper stream",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🐈!VOTE🐈COOPER STREAM🐈GET IN HERE🐈HIDDEN GEM NOMINEE🐈 LOCKED IN🐈",
-   "peak": 232
+   "peak": 232,
+   "note": "Hidden Gem nominee."
   },
   {
    "d": "2026-10-22",
    "start": "23:31",
    "dur": 152,
-   "title": "!vote + gta v streamer lobby",
+   "title": "GTA V streamer lobby",
    "tags": [
     "Grand Theft Auto V"
    ],
    "raw": "💎!VOTE💎GTA V STREAMER LOBBY💎LATE STREAM💎HIDDEN GEM NOMINEE💎LOCKED IN💎",
-   "peak": 114
+   "peak": 114,
+   "note": "Late stream. Hidden Gem nominee."
   },
   {
    "d": "2026-10-23",
    "start": "20:14",
    "dur": 249,
-   "title": "!vote + gta v story mode",
+   "title": "GTA V story mode",
    "tags": [
     "Grand Theft Auto V"
    ],
    "raw": "💎!VOTE💎GTA V STORY MODE💎YIPPIN AND YAPPIN💎HIDDEN GEM NOMINEE💎LOCKED IN💎",
-   "peak": 61
+   "peak": 61,
+   "note": "Hidden Gem nominee."
   },
   {
    "d": "2026-10-25",
    "start": "17:50",
    "dur": 380,
-   "title": "!vote + 1000 minecraft tourney!",
+   "title": "$1000 Minecraft tourney",
    "tags": [
-    "Just Chatting"
+    "Minecraft"
    ],
    "raw": "💎!VOTE💎$1000 MINECRAFT TOURNEY!💎WINNING IT ALL (killed feinberg btw)💎HIDDEN GEM NOMINEE💎EARLIEST STREAM OF ALL TIME💎",
-   "peak": 101
+   "peak": 101,
+   "note": "Earliest stream of all time. Hidden Gem nominee."
   },
   {
    "d": "2026-10-26",
    "start": "21:38",
    "dur": 177,
-   "title": "!vote + unban requests",
+   "title": "Unban requests + reacts",
    "tags": [
-    "Just Chatting"
+    "Reacts"
    ],
    "raw": "💎!VOTE💎UNBAN REQUESTS💎REACTS💎HIDDEN GEM NOMINEE💎SHORT STREAM💎",
-   "peak": 127
+   "peak": 127,
+   "note": "Short stream. Hidden Gem nominee."
   },
   {
    "d": "2026-10-29",
    "start": "20:10",
    "dur": 268,
-   "title": "!vote + short horror films",
+   "title": "Short horror films + Resident Evil Village",
    "tags": [
-    "Just Chatting"
+    "Horror",
+    "Resident Evil Village"
    ],
    "raw": "💎!VOTE💎SHORT HORROR FILMS💎RESIDENT EVIL VIII💎HIDDEN GEM NOMINEE💎WE ARE BACK💎",
-   "peak": 283
+   "peak": 283,
+   "note": "Hidden Gem nominee."
   },
   {
    "d": "2026-10-30",
    "start": "22:13",
    "dur": 238,
-   "title": "!vote + last day to vote",
+   "title": "Last day to vote for Hidden Gem",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎HIDDEN GEM CAMPAIGN 2026💎HIDDEN GEM NOMINEE💎",
-   "peak": 165
+   "peak": 165,
+   "note": "Hidden Gem campaign 2026."
   },
   {
    "d": "2026-10-31",
    "start": "22:41",
    "dur": 140,
-   "title": "!vote + last day to vote",
+   "title": "Halloween giveaway stream: costume + pumpkin carving",
    "tags": [
-    "Just Chatting"
+    "Halloween"
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎GIVEAWAY STREAM💎COSTUME💎PUMPKIN CARVING💎",
-   "peak": 117
+   "peak": 117,
+   "note": "Last day to vote."
   },
   {
    "d": "2026-11-02",
    "start": "20:18",
    "dur": 326,
-   "title": "Chat music reacap + aux battles",
+   "title": "Chat music recap + aux battles",
    "tags": [
-    "Just Chatting"
+    "Music"
    ],
    "raw": "🎃CHAT MUSIC REACAP🎃AUX BATTLES🎃HALLOWEEN COSTUME REVIEW🎃AMERICA ARC SOON🎃",
-   "peak": 126
+   "peak": 126,
+   "note": "Halloween costume review."
   },
   {
    "d": "2026-11-04",
    "start": "21:36",
    "dur": 291,
-   "title": "Huge reacts day + reacting all stream",
+   "title": "Huge reacts day + Uwufufu quizzes",
    "tags": [
-    "Just Chatting"
+    "Reacts"
    ],
    "raw": "🐼HUGE REACTS DAY 🐼REACTING ALL STREAM🐼UWUFUFU QUIZZES🐼1 WEEK TILL AMERICA ARC🐼",
    "peak": 81
@@ -445,23 +462,25 @@
    "d": "2026-11-05",
    "start": "21:20",
    "dur": 235,
-   "title": "Dragon ball tournament + xenoverse 2",
+   "title": "Dragon Ball Xenoverse 2 tournament",
    "tags": [
-    "Just Chatting"
+    "Dragon Ball Xenoverse 2"
    ],
    "raw": "🛸 DRAGON BALL TOURNAMENT 🛸 XENOVERSE 2 🛸 LOCKED IN 🛸 AMERICA ARC SOON 🛸QUIZZES LATER 🛸",
-   "peak": 74
+   "peak": 74,
+   "note": "Quizzes later."
   },
   {
    "d": "2026-11-07",
    "start": "22:41",
    "dur": 189,
-   "title": "We lost dont ask... + fort w/ chat",
+   "title": "Fort with chat + music",
    "tags": [
     "Just Chatting"
    ],
    "raw": "we lost dont ask...🛸 FORT w/ CHAT🛸 GOOD VIBES ONLY 🛸 EASILY RAGEBAITABLE 🛸 AMERICA ARC SOON 🛸LISTENING TO MUSIC 🛸",
-   "peak": 95
+   "peak": 95,
+   "note": "Opened with \"we lost dont ask...\"."
   },
   {
    "d": "2026-11-08",
@@ -626,6 +645,12 @@
    "note": "The viewer tourney he announced all week. Day 1 started on stream 10 Oct.",
    "title": "Cobblemon tourney",
    "to": "2026-10-10"
+  },
+  {
+   "from": "2026-10-16",
+   "note": "Revealed as a Hidden Gem nominee at The Streamer Awards announcement stream; titles pushed !vote until Oct 31.",
+   "title": "Hidden Gem 2026 nominee campaign",
+   "to": "2026-10-31"
   }
  ]
 }
