@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09T02:28:22Z",
+ "updatedAt": "2026-11-09T17:33:24Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -486,12 +486,13 @@
    "d": "2026-11-08",
    "start": "21:34",
    "dur": 294,
-   "title": "Last stream before l.a + chat decides day",
+   "title": "Last stream before L.A. + chat decides the day",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🍔LAST STREAM BEFORE L.A🗽 CHAT DECIDES DAY🔫 GOOD VIBES ONLY🦅 AMERICA ARC SOON 🌎",
-   "peak": 2349
+   "peak": 2349,
+   "note": "America arc starts after this."
   },
   {
    "d": "2026-11-09",
@@ -662,6 +663,12 @@
    "note": "Revealed as a Hidden Gem nominee at The Streamer Awards announcement stream; titles pushed !vote until Oct 31.",
    "title": "Hidden Gem 2026 nominee campaign",
    "to": "2026-10-31"
+  },
+  {
+   "from": "2026-11-09",
+   "to": "2026-11-15",
+   "title": "Break: L.A. trip",
+   "note": "About a week off for his L.A. trip. Days still listed on his Twitch schedule may not happen."
   }
  ]
 }
