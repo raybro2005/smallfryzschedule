@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09T02:19:17Z",
+ "updatedAt": "2026-11-09T02:28:22Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -485,13 +485,12 @@
   {
    "d": "2026-11-08",
    "start": "21:34",
-   "dur": null,
+   "dur": 294,
    "title": "Last stream before l.a + chat decides day",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🍔LAST STREAM BEFORE L.A🗽 CHAT DECIDES DAY🔫 GOOD VIBES ONLY🦅 AMERICA ARC SOON 🌎",
-   "seen": "2026-11-09T02:19:17Z",
    "peak": 2349
   },
   {
