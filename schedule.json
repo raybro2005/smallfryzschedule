@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-15T20:50:12Z",
+ "updatedAt": "2026-11-15T21:02:17Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -503,8 +503,8 @@
     "Just Chatting"
    ],
    "raw": "💎 HIDDEN GEM 2026! 🌴 WE'RE AT TWITCHCON 🏆 IRL SOON!? 🍃 BEST COMMUNITY ON TWITCH 🖥️",
-   "peak": 190,
-   "seen": "2026-11-15T20:50:12Z"
+   "peak": 216,
+   "seen": "2026-11-15T21:02:17Z"
   },
   {
    "d": "2026-11-16",
@@ -638,6 +638,16 @@
   },
   {
    "d": "2026-12-05",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-12-06",
    "start": "21:00",
    "dur": null,
    "planned": true,
