@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-15T00:56:32Z",
+ "updatedAt": "2026-11-15T20:50:12Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -497,13 +497,14 @@
   {
    "d": "2026-11-15",
    "start": "00:00",
-   "dur": 57,
+   "dur": null,
    "title": "Hidden gem 2026! + we're at twitchcon",
    "tags": [
     "Just Chatting"
    ],
    "raw": "💎 HIDDEN GEM 2026! 🌴 WE'RE AT TWITCHCON 🏆 IRL SOON!? 🍃 BEST COMMUNITY ON TWITCH 🖥️",
-   "peak": 190
+   "peak": 190,
+   "seen": "2026-11-15T20:50:12Z"
   },
   {
    "d": "2026-11-16",
