@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-16T21:00:20Z",
+ "updatedAt": "2026-11-18T20:05:13Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -507,13 +507,15 @@
   },
   {
    "d": "2026-11-18",
-   "start": "21:00",
+   "start": "20:00",
    "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
+   "title": "Drama + streamer awards recap",
+   "tags": [
+    "Just Chatting"
+   ],
+   "raw": "🏆DRAMA🏆STREAMER AWARDS RECAP🏆BACK HOME 🏆 HIDDEN GEM 2026! 🏆 TWITCHCON TALKS🏆 BEST COMMUNITY ON TWITCH🏆",
+   "seen": "2026-11-18T20:05:13Z",
+   "peak": 15
   },
   {
    "d": "2026-11-20",
