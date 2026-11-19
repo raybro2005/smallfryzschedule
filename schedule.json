@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T00:33:46Z",
+ "updatedAt": "2026-11-19T01:03:56Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -508,13 +508,12 @@
   {
    "d": "2026-11-18",
    "start": "20:00",
-   "dur": null,
+   "dur": 304,
    "title": "Drama + streamer awards recap",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🏆DRAMA🏆STREAMER AWARDS RECAP🏆BACK HOME 🏆 HIDDEN GEM 2026! 🏆 TWITCHCON TALKS🏆 BEST COMMUNITY ON TWITCH🏆",
-   "seen": "2026-11-19T00:33:46Z",
    "peak": 122
   },
   {
