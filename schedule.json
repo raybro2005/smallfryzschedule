@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T03:21:40Z",
+ "updatedAt": "2026-11-20T03:24:27Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -521,13 +521,12 @@
   {
    "d": "2026-11-19",
    "start": "21:51",
-   "dur": null,
+   "dur": 333,
    "title": "British man plays GTA 6",
    "tags": [
     "Grand Theft Auto VI"
    ],
    "raw": "🔫BRITISH MAN PLAYS GTA 6🔫LOCKED IN🔫BACK HOME 🔫 HIDDEN GEM 2026! 🔫 TWITCHCON TALKS🔫",
-   "seen": "2026-11-20T03:18:23Z",
    "peak": 210,
    "note": "Back home. TwitchCon talks."
   },
