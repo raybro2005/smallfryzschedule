@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T03:24:27Z",
+ "updatedAt": "2026-11-20T21:00:18Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -531,16 +531,6 @@
    "note": "Back home. TwitchCon talks."
   },
   {
-   "d": "2026-11-20",
-   "start": "21:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
-  },
-  {
    "d": "2026-11-21",
    "start": "21:00",
    "dur": null,
@@ -672,6 +662,16 @@
   },
   {
    "d": "2026-12-09",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-12-11",
    "start": "21:00",
    "dur": null,
    "planned": true,
