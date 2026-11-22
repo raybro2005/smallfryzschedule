@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-22T02:04:48Z",
+ "updatedAt": "2026-11-22T21:00:17Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -542,16 +542,6 @@
    "peak": 2922
   },
   {
-   "d": "2026-11-22",
-   "start": "21:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
-  },
-  {
    "d": "2026-11-23",
    "start": "21:00",
    "dur": null,
@@ -683,6 +673,16 @@
   },
   {
    "d": "2026-12-12",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-12-13",
    "start": "21:00",
    "dur": null,
    "planned": true,
