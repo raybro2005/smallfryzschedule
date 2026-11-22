@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-22T01:43:41Z",
+ "updatedAt": "2026-11-22T02:04:48Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -533,13 +533,12 @@
   {
    "d": "2026-11-21",
    "start": "21:29",
-   "dur": null,
+   "dur": 276,
    "title": "Chat day + discord",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🐑CHAT DAY🐑DISCORD🐑STORYTIMES🐑HIDDEN GEM 2026!🐑TIER LISTS🐑",
-   "seen": "2026-11-22T01:43:41Z",
    "peak": 2922
   },
   {
