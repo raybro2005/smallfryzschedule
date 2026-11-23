@@ -2,6 +2,7 @@
 @font-face{font-family:"Shantell Sans";src:url(fonts/shantell-sans.woff2) format("woff2");font-weight:300 800;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Chalkboard";src:url(fonts/chalkboard.woff2) format("woff2");font-weight:400;font-display:swap;size-adjust:112%}
 @font-face{font-family:"Matcha Style";src:url(fonts/matcha-style.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"JetBrains Mono";src:url(fonts/jetbrains-mono-500.woff2) format("woff2");font-weight:400 500;font-display:swap}
 /* Layout: a fan-made month — painted day blobs on aqua paper, a detail card beside the grid, a field guide below. */
@@ -9,8 +10,8 @@
   --bg:#EEF5F3; --surface:#F9FCFB; --ink:#14323A; --muted:#58717A; --line:#CFE0DC;
   --stream:#F59E4B; --stream-ink:#4A2205; --off:#C9D5DF; --event:#CDBDF2; --event-ink:#3A2A6B;
   --live:#E5484D; --stamp:#B42328; --accent:#1F7A8C;
-  --f-display:"Shantell Sans","Comic Neue","Segoe Print",cursive;
-  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"Chalkboard","Shantell Sans","Comic Neue","Segoe Print",cursive;
+  --f-body:"Chalkboard","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --r:14px;
 }
