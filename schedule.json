@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-23T23:28:56Z",
+ "updatedAt": "2026-11-23T23:41:00Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -120,7 +120,8 @@
     "Food",
     "Discord"
    ],
-   "title": "UK vs Japanese snacks review"
+   "title": "UK vs Japanese snacks review",
+   "vod": "https://www.twitch.tv/videos/2884858442"
   },
   {
    "d": "2026-09-27",
@@ -131,7 +132,8 @@
    "tags": [
     "Planet of Lana II"
    ],
-   "title": "Planet of Lana II"
+   "title": "Planet of Lana II",
+   "vod": "https://www.twitch.tv/videos/2885819300"
   },
   {
    "d": "2026-09-29",
@@ -142,7 +144,8 @@
    "tags": [
     "Reacts"
    ],
-   "title": "Reacts day"
+   "title": "Reacts day",
+   "vod": "https://www.twitch.tv/videos/2887472690"
   },
   {
    "d": "2026-10-01",
@@ -153,7 +156,8 @@
    "tags": [
     "Music"
    ],
-   "title": "Chat music day: aux battles"
+   "title": "Chat music day: aux battles",
+   "vod": "https://www.twitch.tv/videos/2889188135"
   },
   {
    "d": "2026-10-02",
@@ -169,7 +173,8 @@
    "with": [
     "ibyrone",
     "OurAsil"
-   ]
+   ],
+   "vod": "https://www.twitch.tv/videos/2890075234"
   },
   {
    "d": "2026-10-03",
@@ -181,7 +186,8 @@
     "Reacts",
     "Games"
    ],
-   "title": "Maybe some reacts, maybe some games"
+   "title": "Maybe some reacts, maybe some games",
+   "vod": "https://www.twitch.tv/videos/2891063061"
   },
   {
    "d": "2026-10-04",
@@ -194,7 +200,8 @@
     "Gartic Phone",
     "Web games"
    ],
-   "title": "Jackbox with chat + drawing games"
+   "title": "Jackbox with chat + drawing games",
+   "vod": "https://www.twitch.tv/videos/2892032915"
   },
   {
    "d": "2026-10-06",
@@ -210,7 +217,8 @@
    "title": "Beat me in chess = sub. Road to 400 elo",
    "with": [
     "HighVarianceTV"
-   ]
+   ],
+   "vod": "https://www.twitch.tv/videos/2893727824"
   },
   {
    "d": "2026-10-08",
@@ -223,7 +231,8 @@
     "Horror",
     "Reacts"
    ],
-   "title": "Resident Evil 7, reacts later"
+   "title": "Resident Evil 7, reacts later",
+   "vod": "https://www.twitch.tv/videos/2895388273"
   },
   {
    "d": "2026-10-09",
@@ -236,7 +245,8 @@
     "Gamba",
     "Reacts"
    ],
-   "title": "Huge gamba stream + reacts day"
+   "title": "Huge gamba stream + reacts day",
+   "vod": "https://www.twitch.tv/videos/2896370788"
   },
   {
    "d": "2026-10-10",
@@ -250,7 +260,8 @@
    ],
    "raw": "🟦 41/100 T1 SUBS 🟦 LATE STREAM 🟦 COBBLEMON TOURNEY DAY 1 🟦YIPPIN AND YAPPIN 🟦 LOCKED IN 🟦",
    "peak": 84,
-   "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs."
+   "note": "Late stream. Sub goal in the title: 41/100 tier 1 subs.",
+   "vod": "https://www.twitch.tv/videos/2897343692"
   },
   {
    "d": "2026-10-11",
@@ -263,7 +274,8 @@
    ],
    "raw": "🧟 45/100 T1 SUBS 🧟 LATE STREAM 🧟 THE RESIDENTS ARE EVIL 🧟MAYBE DISCORD 🧟 YIPPIN AND YAPPIN 🧟 LOCKED IN 🧟",
    "peak": 99,
-   "note": "Late stream. Sub goal in the title: 45/100 tier 1 subs."
+   "note": "Late stream. Sub goal in the title: 45/100 tier 1 subs.",
+   "vod": "https://www.twitch.tv/videos/2898288475"
   },
   {
    "d": "2026-10-14",
@@ -274,7 +286,8 @@
     "Just Chatting"
    ],
    "raw": "⚔️ 53/100 T1 SUBS ⚔️ LATE STREAM ⚔️ MINI DISCORD ⚔️ DARK SOULS 3 ⚔️ YIPPIN AND YAPPIN ⚔️ ELDEN RING MAYBE ⚔️",
-   "peak": 123
+   "peak": 123,
+   "vod": "https://www.twitch.tv/videos/2900848724"
   },
   {
    "d": "2026-10-15",
@@ -285,7 +298,8 @@
     "Just Chatting"
    ],
    "raw": "💸 59/100 T1 SUBS 💸 SHORT REACTS 💸FRIENDSLOP💸BIG DAY TOMORROW💸YIPPIN AND YAPPIN 💸",
-   "peak": 63
+   "peak": 63,
+   "vod": "https://www.twitch.tv/videos/2901750623"
   },
   {
    "d": "2026-10-16",
@@ -296,7 +310,8 @@
     "The Streamer Awards"
    ],
    "raw": "💎THE STREAMER AWARDS ANNOUNCMENT STREAM💎 HIDDEN GEM REVEAL💎GET IN HERE 💎",
-   "peak": 4695
+   "peak": 4695,
+   "vod": "https://www.twitch.tv/videos/2902489664"
   },
   {
    "d": "2026-10-17",
@@ -312,7 +327,8 @@
    "with": [
     "NotSoulsLive"
    ],
-   "note": "Horror games with Cochard and JShock. Hidden Gem campaigning."
+   "note": "Horror games with Cochard and JShock. Hidden Gem campaigning.",
+   "vod": "https://www.twitch.tv/videos/2903512272"
   },
   {
    "d": "2026-10-18",
@@ -324,7 +340,8 @@
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 REACTS💎YAPPING💎THANKFUL💎 HIDDEN GEM CAMPAIGNING 💎",
    "peak": 201,
-   "note": "Hidden Gem campaigning."
+   "note": "Hidden Gem campaigning.",
+   "vod": "https://www.twitch.tv/videos/2904506979"
   },
   {
    "d": "2026-10-19",
@@ -336,7 +353,8 @@
    ],
    "raw": "💎!VOTE💎HIDDEN GEM💎 RESIDENT EVIL VILLAGE💎FIRST PLAUTHROUGH💎 SHORT STREAM💎HIDDEN GEM CAMPAIGNING 💎",
    "peak": 100,
-   "note": "Short stream. Hidden Gem campaigning."
+   "note": "Short stream. Hidden Gem campaigning.",
+   "vod": "https://www.twitch.tv/videos/2905369957"
   },
   {
    "d": "2026-10-21",
@@ -348,7 +366,8 @@
    ],
    "raw": "🐈!VOTE🐈COOPER STREAM🐈GET IN HERE🐈HIDDEN GEM NOMINEE🐈 LOCKED IN🐈",
    "peak": 232,
-   "note": "Hidden Gem nominee."
+   "note": "Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2907090019"
   },
   {
    "d": "2026-10-22",
@@ -360,7 +379,8 @@
    ],
    "raw": "💎!VOTE💎GTA V STREAMER LOBBY💎LATE STREAM💎HIDDEN GEM NOMINEE💎LOCKED IN💎",
    "peak": 114,
-   "note": "Late stream. Hidden Gem nominee."
+   "note": "Late stream. Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2908061488"
   },
   {
    "d": "2026-10-23",
@@ -372,7 +392,8 @@
    ],
    "raw": "💎!VOTE💎GTA V STORY MODE💎YIPPIN AND YAPPIN💎HIDDEN GEM NOMINEE💎LOCKED IN💎",
    "peak": 61,
-   "note": "Hidden Gem nominee."
+   "note": "Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2908814692"
   },
   {
    "d": "2026-10-25",
@@ -384,7 +405,8 @@
    ],
    "raw": "💎!VOTE💎$1000 MINECRAFT TOURNEY!💎WINNING IT ALL (killed feinberg btw)💎HIDDEN GEM NOMINEE💎EARLIEST STREAM OF ALL TIME💎",
    "peak": 101,
-   "note": "Earliest stream of all time. Hidden Gem nominee."
+   "note": "Earliest stream of all time. Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2910620863"
   },
   {
    "d": "2026-10-26",
@@ -396,7 +418,8 @@
    ],
    "raw": "💎!VOTE💎UNBAN REQUESTS💎REACTS💎HIDDEN GEM NOMINEE💎SHORT STREAM💎",
    "peak": 127,
-   "note": "Short stream. Hidden Gem nominee."
+   "note": "Short stream. Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2911650549"
   },
   {
    "d": "2026-10-29",
@@ -409,7 +432,8 @@
    ],
    "raw": "💎!VOTE💎SHORT HORROR FILMS💎RESIDENT EVIL VIII💎HIDDEN GEM NOMINEE💎WE ARE BACK💎",
    "peak": 283,
-   "note": "Hidden Gem nominee."
+   "note": "Hidden Gem nominee.",
+   "vod": "https://www.twitch.tv/videos/2914214776"
   },
   {
    "d": "2026-10-30",
@@ -421,7 +445,8 @@
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎HIDDEN GEM CAMPAIGN 2026💎HIDDEN GEM NOMINEE💎",
    "peak": 165,
-   "note": "Hidden Gem campaign 2026."
+   "note": "Hidden Gem campaign 2026.",
+   "vod": "https://www.twitch.tv/videos/2915209218"
   },
   {
    "d": "2026-10-31",
@@ -433,7 +458,8 @@
    ],
    "raw": "💎!VOTE💎LAST DAY TO VOTE💎GIVEAWAY STREAM💎COSTUME💎PUMPKIN CARVING💎",
    "peak": 117,
-   "note": "Last day to vote."
+   "note": "Last day to vote.",
+   "vod": "https://www.twitch.tv/videos/2916187038"
   },
   {
    "d": "2026-11-02",
@@ -445,7 +471,8 @@
    ],
    "raw": "🎃CHAT MUSIC REACAP🎃AUX BATTLES🎃HALLOWEEN COSTUME REVIEW🎃AMERICA ARC SOON🎃",
    "peak": 126,
-   "note": "Halloween costume review."
+   "note": "Halloween costume review.",
+   "vod": "https://www.twitch.tv/videos/2917843808"
   },
   {
    "d": "2026-11-04",
@@ -456,7 +483,8 @@
     "Reacts"
    ],
    "raw": "🐼HUGE REACTS DAY 🐼REACTING ALL STREAM🐼UWUFUFU QUIZZES🐼1 WEEK TILL AMERICA ARC🐼",
-   "peak": 81
+   "peak": 81,
+   "vod": "https://www.twitch.tv/videos/2919655199"
   },
   {
    "d": "2026-11-05",
@@ -468,7 +496,8 @@
    ],
    "raw": "🛸 DRAGON BALL TOURNAMENT 🛸 XENOVERSE 2 🛸 LOCKED IN 🛸 AMERICA ARC SOON 🛸QUIZZES LATER 🛸",
    "peak": 74,
-   "note": "Quizzes later."
+   "note": "Quizzes later.",
+   "vod": "https://www.twitch.tv/videos/2920556654"
   },
   {
    "d": "2026-11-07",
@@ -480,7 +509,8 @@
    ],
    "raw": "we lost dont ask...🛸 FORT w/ CHAT🛸 GOOD VIBES ONLY 🛸 EASILY RAGEBAITABLE 🛸 AMERICA ARC SOON 🛸LISTENING TO MUSIC 🛸",
    "peak": 95,
-   "note": "Opened with \"we lost dont ask...\"."
+   "note": "Opened with \"we lost dont ask...\".",
+   "vod": "https://www.twitch.tv/videos/2922573151"
   },
   {
    "d": "2026-11-08",
@@ -492,7 +522,8 @@
    ],
    "raw": "🍔LAST STREAM BEFORE L.A🗽 CHAT DECIDES DAY🔫 GOOD VIBES ONLY🦅 AMERICA ARC SOON 🌎",
    "peak": 2349,
-   "note": "America arc starts after this."
+   "note": "America arc starts after this.",
+   "vod": "https://www.twitch.tv/videos/2923518682"
   },
   {
    "d": "2026-11-15",
@@ -504,7 +535,8 @@
    ],
    "raw": "💎 HIDDEN GEM 2026! 🌴 WE'RE AT TWITCHCON 🏆 IRL SOON!? 🍃 BEST COMMUNITY ON TWITCH 🖥️",
    "peak": 221,
-   "note": "Streamed from TwitchCon during the L.A. trip. Hidden Gem 2026."
+   "note": "Streamed from TwitchCon during the L.A. trip. Hidden Gem 2026.",
+   "vod": "https://www.twitch.tv/videos/2929954470"
   },
   {
    "d": "2026-11-18",
@@ -516,7 +548,8 @@
    ],
    "raw": "🏆DRAMA🏆STREAMER AWARDS RECAP🏆BACK HOME 🏆 HIDDEN GEM 2026! 🏆 TWITCHCON TALKS🏆 BEST COMMUNITY ON TWITCH🏆",
    "peak": 122,
-   "note": "Back home. TwitchCon talks."
+   "note": "Back home. TwitchCon talks.",
+   "vod": "https://www.twitch.tv/videos/2932650166"
   },
   {
    "d": "2026-11-19",
@@ -528,7 +561,8 @@
    ],
    "raw": "🔫BRITISH MAN PLAYS GTA 6🔫LOCKED IN🔫BACK HOME 🔫 HIDDEN GEM 2026! 🔫 TWITCHCON TALKS🔫",
    "peak": 210,
-   "note": "Back home. TwitchCon talks."
+   "note": "Back home. TwitchCon talks.",
+   "vod": "https://www.twitch.tv/videos/2934206776"
   },
   {
    "d": "2026-11-21",
@@ -539,7 +573,8 @@
     "Just Chatting"
    ],
    "raw": "🐑CHAT DAY🐑DISCORD🐑STORYTIMES🐑HIDDEN GEM 2026!🐑TIER LISTS🐑",
-   "peak": 2922
+   "peak": 2922,
+   "vod": "https://www.twitch.tv/videos/2936590717"
   },
   {
    "d": "2026-11-23",
@@ -550,8 +585,9 @@
     "Just Chatting"
    ],
    "raw": "😫REACTS😫NARUTO V LUFFY 😫VIOLENT VIRA MUSIC VIDEO😫BINGO😫LETS GOOOO😫",
-   "seen": "2026-11-23T23:28:56Z",
-   "peak": 68
+   "seen": "2026-11-23T23:41:00Z",
+   "peak": 68,
+   "vod": "https://www.twitch.tv/videos/2938727492"
   },
   {
    "d": "2026-11-25",
