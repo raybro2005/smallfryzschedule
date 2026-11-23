@@ -2,6 +2,7 @@
 @font-face{font-family:"Shantell Sans";src:url(fonts/shantell-sans.woff2) format("woff2");font-weight:300 800;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Matcha Style";src:url(fonts/matcha-style.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"JetBrains Mono";src:url(fonts/jetbrains-mono-500.woff2) format("woff2");font-weight:400 500;font-display:swap}
 /* Layout: a fan-made month — painted day blobs on aqua paper, a detail card beside the grid, a field guide below. */
 :root{
@@ -47,7 +48,7 @@ header{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-
 
 /* month head */
 .monthbar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-block:12px 16px}
-h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,8vw,4.4rem);line-height:.95;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1{font-family:"Matcha Style",var(--f-display);font-weight:400;font-synthesis:none;font-size:clamp(2.6rem,8vw,4.4rem);line-height:.95;margin:0;letter-spacing:-.01em;text-wrap:balance}
 h1 small{display:block;font-family:var(--f-mono);font-weight:500;font-size:.95rem;color:var(--muted);letter-spacing:.06em;margin-top:8px}
 .nav{display:flex;gap:8px;align-items:center}
 .nav button{background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700}
