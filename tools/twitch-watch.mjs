@@ -35,12 +35,27 @@ async function twitch() {
   return data && data[0] ? data[0] : null;   // null = offline
 }
 // His posted Twitch schedule (the "Schedule" tab on his channel). Returns [] if none is posted, null if it couldn't be read.
+let USER_ID;
+async function userId() {
+  if (USER_ID === undefined) {
+    const u = await helix(`users?login=${LOGIN}`);
+    USER_ID = u.ok ? (await u.json()).data?.[0]?.id || null : null;
+  }
+  return USER_ID;
+}
+// His past broadcasts (VODs). Returns a list, or null if they couldn't be read.
+async function twitchVods() {
+  try {
+    const id = await userId(); if (!id) return null;
+    const r = await helix(`videos?user_id=${id}&type=archive&first=100`);
+    if (!r.ok) return null;
+    return (await r.json()).data || [];
+  } catch { return null; }
+}
 async function twitchSchedule() {
   try {
-    const u = await helix(`users?login=${LOGIN}`);
-    if (!u.ok) return null;
-    const user = (await u.json()).data?.[0]; if (!user) return null;
-    const r = await helix(`schedule?broadcaster_id=${user.id}&first=25`);
+    const id = await userId(); if (!id) return null;
+    const r = await helix(`schedule?broadcaster_id=${id}&first=25`);
     if (r.status === 404) return [];          // no schedule posted
     if (!r.ok) return null;
     const body = await r.json();
@@ -135,6 +150,28 @@ if (segs) {
   if (JSON.stringify(j.streams) !== before) { important = true; note = note || `Twitch schedule: ${wanted.size} upcoming`; }
   summary(wanted.size ? `Twitch schedule: **${wanted.size}** upcoming stream(s) in the next 3 weeks.` : "Twitch schedule: nothing posted for the next 3 weeks.");
 } else summary("Twitch schedule: couldn't be read this time.");
+
+// ---- VOD links for past streams ----
+// Twitch deletes old VODs after a while, so links are added and removed to match what Twitch still has.
+const vods = await twitchVods();
+if (vods) {
+  const parseDur = t => { const m = /^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/.exec(t || ""); return m ? (+m[1] || 0) * 60 + (+m[2] || 0) + (+m[3] || 0) / 60 : 0; };
+  const byDay = new Map();                                      // UTC day -> longest VOD that started that day
+  for (const v of vods) {
+    if (!v.created_at || !/^\d+$/.test(String(v.id))) continue;
+    const day = ymd(new Date(v.created_at)), len = parseDur(v.duration);
+    if (!byDay.has(day) || len > byDay.get(day).len) byDay.set(day, { url: `https://www.twitch.tv/videos/${v.id}`, len });
+  }
+  let n = 0;
+  for (const s of j.streams) {
+    if (s.planned) continue;
+    const want = byDay.get(s.d)?.url;
+    if (want && s.vod !== want) { s.vod = want; n++; }
+    else if (!want && s.vod) { delete s.vod; n++; }
+  }
+  if (n) { important = true; note = note || `VOD links updated (${n})`; }
+  summary(`VODs: **${byDay.size}** day(s) with a VOD on Twitch.`);
+} else summary("VODs: couldn't be read this time.");
 
 if (!important) { writeFileSync(STATE, JSON.stringify({ live: !!live, changed: false })); console.log(live ? "Live, nothing new to save yet." : "Offline, nothing to update."); process.exit(0); }
 j.updatedAt = iso(now);

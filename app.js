@@ -35,7 +35,7 @@ function dayKeyOf(date){return prefs.tz==="utc"
 function refreshToday(){const k=dayKeyOf(new Date());const changed=k!==todayKey;todayKey=k;return changed}
 const MONTHS=["january","february","march","april","may","june","july","august","september","october","november","december"];
 /* ===== security: validate + trim everything read from the store, escape everything rendered ===== */
-const RX_DATE=/^\d{4}-\d{2}-\d{2}$/, RX_TIME=/^([01]\d|2[0-3]):[0-5]\d$/, RX_TWITCH=/^[A-Za-z0-9_]{1,25}$/;
+const RX_DATE=/^\d{4}-\d{2}-\d{2}$/, RX_TIME=/^([01]\d|2[0-3]):[0-5]\d$/, RX_TWITCH=/^[A-Za-z0-9_]{1,25}$/; const RX_VOD=/^https:\/\/www\.twitch\.tv\/videos\/\d{1,15}$/;
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function str(v,max){return typeof v==="string"?v.replace(/[\u0000-\u001f\u007f]/g,"").trim().slice(0,max):""}
 function int(v,min,max){return Number.isInteger(v)&&v>=min&&v<=max?v:null}
@@ -50,6 +50,7 @@ function cleanStream(o){
   const peak=int(o.peak,0,10000000); if(peak!==null)out.peak=peak;
   const note=str(o.note,300); if(note)out.note=note;
   const raw=str(o.raw,300); if(raw)out.raw=raw;
+  if(typeof o.vod==="string"&&RX_VOD.test(o.vod))out.vod=o.vod;
   return out;
 }
 function cleanEvent(o){
@@ -202,7 +203,9 @@ function renderDetail(){
     const range=e.from===e.to?"One day":`${fmtShort(e.from)} – ${fmtShort(e.to)}`;
     h+=`<div class="entry"><span class="chip event">Event · ${range}</span><h3>${esc(e.title)}</h3>${e.note?`<p style="margin:0;font-size:.92rem">${esc(e.note)}</p>`:""}</div>`;
   });
-  h+=`<a class="watch" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">Pull up on Twitch →</a>`;
+  const vod=list.find(s=>s.vod&&!s.planned&&s.dur!==null); // a finished stream links to its VOD instead of the channel
+  h+=vod?`<a class="watch" href="${esc(vod.vod)}" target="_blank" rel="noopener noreferrer">Watch the VOD →</a>`
+        :`<a class="watch" href="https://www.twitch.tv/smallfryz" target="_blank" rel="noopener noreferrer">Pull up on Twitch →</a>`;
   $("detail").innerHTML=h;
 }
 /* faint doodles behind some empty days (swap these files for real drawings) */
