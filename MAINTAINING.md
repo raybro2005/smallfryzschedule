@@ -47,6 +47,31 @@ Find the line `"streams": [` near the top and paste this right under it:
 
 `"source": "fryz"` makes it beat his Twitch schedule for that day, and the site labels it "From Fryz's schedule". When he goes live that day, it turns into the real stream on its own.
 
+## Marking days (days off, trips, tourneys, subathons)
+
+Marked days are **events**. On the calendar they show as a purple band across those days, and clicking a day shows the event's title and note. Find the line `"events": [` near the bottom of the file and paste this right under it:
+
+```json
+  {
+   "from": "2026-12-24",
+   "to": "2026-12-26",
+   "title": "Day off: Christmas",
+   "note": "No streams over Christmas."
+  },
+```
+
+- **from** and **to** are the first and last day, as YYYY-MM-DD, and are inclusive. For a single day, use the same date for both.
+- These are calendar dates, not UTC times, so no time conversion is needed.
+- Same comma rules as streams.
+
+An event only marks the days. It doesn't remove streams, so if he's taking a day off and his Twitch schedule still lists a stream, say so in the note.
+
+## How a planned day turns into the real stream
+
+You don't do anything. When he goes live, the checker looks for a planned entry on the same **UTC date** as his start time, replaces it with the real stream, and adds a "Pull up on Twitch" link.
+
+So enter the date the stream starts **in UTC**. In winter, anything he starts after 5:00 PM Edmonton time is already the next day in UTC. If you put it on the wrong day, the real stream still shows up on its own day, and the leftover planned entry is removed once the day has passed.
+
 ## Fixing a title
 
 Search the file (Ctrl+F) for the date, e.g. `"d": "2026-11-19"`, and change the text inside the quotes after `"title":`. Leave `"raw"` alone, since that's his original Twitch title.
