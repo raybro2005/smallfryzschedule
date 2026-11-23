@@ -242,6 +242,15 @@ legend{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-trans
 .nav button,.livechip,.tab{position:relative;border-color:transparent!important;box-shadow:none!important;border-radius:14px 10px 16px 12px!important}
 .tab::after{border-width:2.5px}
 
+/* second, lighter pencil pass: slightly off the first line so corners cross like a quick sketch */
+.detailwrap{position:relative;min-width:0}
+.cal::before,.detailwrap::before,.nav button::before,.livechip::before,.tab::before{content:"";position:absolute;inset:-3px -2px -2px -4px;
+  border:1.3px solid color-mix(in srgb,var(--ink) 60%,transparent);border-radius:24px 14px 26px 16px / 16px 26px 14px 24px;
+  transform:rotate(-.45deg);filter:url(#rough2);pointer-events:none}
+.nav button::before,.livechip::before,.tab::before{transform:rotate(-1.4deg);border-radius:10px 16px 12px 18px}
+.detailwrap::before{transform:rotate(-1.6deg);z-index:1}
+.detail{z-index:2}
+
 /* today: a pen scribble instead of a dashed ring */
 .day.today::before{content:"";position:absolute;inset:-2%;z-index:4;background:var(--accent);
   -webkit-mask:url(doodles/scribble.svg) center/contain no-repeat;mask:url(doodles/scribble.svg) center/contain no-repeat;pointer-events:none}
