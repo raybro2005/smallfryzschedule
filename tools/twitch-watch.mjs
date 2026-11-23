@@ -121,14 +121,17 @@ if (segs) {
     });
   }
   const realDays = new Set(j.streams.filter(x => !x.planned).map(x => x.d));
+  // days Fryz gave us directly: these win over his Twitch schedule
+  const fryzDays = new Set(j.streams.filter(x => x.planned && x.source === "fryz").map(x => x.d));
   const before = JSON.stringify(j.streams);
   j.streams = j.streams.filter(x => {
     if (!x.planned) return true;
+    if (x.source === "fryz") return true;                       // schedule from Fryz: never replaced by Twitch
     if (wanted.has(x.d)) return false;                          // official entry replaces any guess for that day
     if (x.source === "twitch") return false;                    // dropped or cancelled on Twitch, or already happened
     return true;
   });
-  for (const [day, entry] of wanted) if (!realDays.has(day)) j.streams.push(entry);
+  for (const [day, entry] of wanted) if (!realDays.has(day) && !fryzDays.has(day)) j.streams.push(entry);
   if (JSON.stringify(j.streams) !== before) { important = true; note = note || `Twitch schedule: ${wanted.size} upcoming`; }
   summary(wanted.size ? `Twitch schedule: **${wanted.size}** upcoming stream(s) in the next 3 weeks.` : "Twitch schedule: nothing posted for the next 3 weeks.");
 } else summary("Twitch schedule: couldn't be read this time.");

@@ -44,7 +44,7 @@ function cleanStream(o){
   if(!o||typeof o!=="object"||!validDate(o.d))return null;
   const title=str(o.title,140); if(!title)return null;
   const out={d:o.d,title,start:typeof o.start==="string"&&RX_TIME.test(o.start)?o.start:null,dur:int(o.dur,1,2880),
-    planned:o.planned===true,unsure:o.unsure===true,source:o.source==="twitch"?"twitch":undefined};
+    planned:o.planned===true,unsure:o.unsure===true,source:o.source==="twitch"||o.source==="fryz"?o.source:undefined};
   if(Array.isArray(o.tags))out.tags=o.tags.map(t=>str(t,40)).filter(Boolean).slice(0,8);
   if(Array.isArray(o.with))out.with=o.with.filter(n=>typeof n==="string"&&RX_TWITCH.test(n)).slice(0,10);
   const peak=int(o.peak,0,10000000); if(peak!==null)out.peak=peak;
@@ -180,7 +180,7 @@ function renderDetail(){
   }
   list.forEach(s=>{
     const live=isLive(s), t=startDate(s);
-    const chip=live?`<span class="chip live">Live now</span>`:s.planned?`<span class="chip stream">${s.unsure?"Rumoured (from his titles)":s.source==="twitch"?"On his Twitch schedule":"Planned"}</span>`:`<span class="chip stream">Streamed</span>`;
+    const chip=live?`<span class="chip live">Live now</span>`:s.planned?`<span class="chip stream">${s.unsure?"Rumoured (from his titles)":s.source==="twitch"?"On his Twitch schedule":s.source==="fryz"?"From Fryz's schedule":"Planned"}</span>`:`<span class="chip stream">Streamed</span>`;
     let rows="";
     /* start time and length only appear once the stream has actually started */
     const started=!s.planned&&t&&t.getTime()<=Date.now();
