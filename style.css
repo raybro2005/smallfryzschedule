@@ -32,7 +32,7 @@ button{font:inherit;color:inherit}
 
 /* header */
 header{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:24px 8px;overflow:hidden}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:800;font-size:1.35rem;text-decoration:none;color:var(--ink)}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Matcha Style",var(--f-display);font-weight:400;font-synthesis:none;font-size:1.35rem;text-decoration:none;color:var(--ink)}
 .brand img{width:36px;height:36px;flex:none}
 .updated{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);width:100%;order:3}
 .livechip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--surface);border:1.5px solid var(--line);font-weight:700;font-size:.9rem;text-decoration:none;color:var(--ink)}
@@ -93,7 +93,7 @@ h1 small{display:block;font-family:var(--f-mono);font-weight:500;font-size:.95re
 /* detail */
 .detail{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
 @media (max-width:860px){.detail{position:static}}
-.detail h2{font-family:var(--f-display);font-weight:800;font-size:1.5rem;margin:0 0 4px;line-height:1.15}
+.detail h2{font-family:"Matcha Style",var(--f-display);font-weight:400;font-synthesis:none;font-size:1.5rem;margin:0 0 4px;line-height:1.15}
 .chip{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:700;font-size:.78rem;margin-block:8px}
 .chip.stream{background:var(--stream);color:var(--stream-ink)}
 .chip.off{background:var(--off)}
@@ -116,7 +116,7 @@ dd{margin:0;font-variant-numeric:tabular-nums}
 
 /* guide */
 .guide{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px}
-.guide h2{font-family:var(--f-display);font-weight:800;font-size:1.6rem;margin:0 0 8px;grid-column:1/-1}
+.guide h2{font-family:"Matcha Style",var(--f-display);font-weight:400;font-synthesis:none;font-size:1.6rem;margin:0 0 8px;grid-column:1/-1}
 .guide h3{font-family:var(--f-display);font-weight:600;font-size:1.1rem;margin:0 0 8px}
 .guide p,.guide li{max-width:62ch;color:var(--ink)}
 .guide ul{padding-left:1.1em;margin:0}
@@ -174,7 +174,7 @@ dialog#settings{background:var(--surface);color:var(--ink);border:1.5px solid va
   box-shadow:5px 5px 0 color-mix(in srgb,var(--ink) 30%,transparent);padding:24px;width:min(720px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto}
 dialog#settings::backdrop{background:rgba(8,22,28,.45)}
 .sethead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.sethead h2{display:flex;align-items:center;gap:12px;margin:0;font-family:var(--f-display);font-weight:800;font-size:1.35rem}
+.sethead h2{display:flex;align-items:center;gap:12px;margin:0;font-family:"Matcha Style",var(--f-display);font-weight:400;font-synthesis:none;font-size:1.35rem}
 .closebtn{width:38px;height:38px;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface);font-size:1.4rem;line-height:1;cursor:pointer}
 .setgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media (max-width:640px){.setgrid{grid-template-columns:minmax(0,1fr)}}
