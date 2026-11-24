@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-24T01:11:30Z",
+ "updatedAt": "2026-11-24T01:14:32Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -579,13 +579,12 @@
   {
    "d": "2026-11-23",
    "start": "21:20",
-   "dur": null,
+   "dur": 235,
    "title": "Reacts + naruto v luffy",
    "tags": [
     "Just Chatting"
    ],
    "raw": "😫REACTS😫NARUTO V LUFFY 😫VIOLENT VIRA MUSIC VIDEO😫BINGO😫LETS GOOOO😫",
-   "seen": "2026-11-24T01:11:30Z",
    "peak": 68,
    "vod": "https://www.twitch.tv/videos/2938727492"
   },
