@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25T00:17:56Z",
+ "updatedAt": "2026-11-25T21:00:16Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -601,16 +601,6 @@
    "vod": "https://www.twitch.tv/videos/2939661706"
   },
   {
-   "d": "2026-11-25",
-   "start": "21:00",
-   "dur": null,
-   "planned": true,
-   "source": "twitch",
-   "title": "Scheduled stream",
-   "tags": [],
-   "note": "From his Twitch schedule."
-  },
-  {
    "d": "2026-11-27",
    "start": "21:00",
    "dur": null,
@@ -742,6 +732,16 @@
   },
   {
    "d": "2026-12-14",
+   "start": "21:00",
+   "dur": null,
+   "planned": true,
+   "source": "twitch",
+   "title": "Scheduled stream",
+   "tags": [],
+   "note": "From his Twitch schedule."
+  },
+  {
+   "d": "2026-12-16",
    "start": "21:00",
    "dur": null,
    "planned": true,
