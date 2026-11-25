@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25T00:11:52Z",
+ "updatedAt": "2026-11-25T00:17:56Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -591,13 +591,12 @@
   {
    "d": "2026-11-24",
    "start": "20:23",
-   "dur": null,
+   "dur": 235,
    "title": "Pirate token hunt + fortnite w/ chat",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🏴‍☠️PIRATE TOKEN HUNT🏴‍☠️FORTNITE w/ CHAT🏴‍☠️GAMBA LATER🏴‍☠️THE ONE PIECE IS REALLL🏴‍☠️LETS GOOOO🏴‍☠️",
-   "seen": "2026-11-25T00:11:52Z",
    "peak": 101,
    "vod": "https://www.twitch.tv/videos/2939661706"
   },
