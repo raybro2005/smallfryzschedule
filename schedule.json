@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-27T01:51:47Z",
+ "updatedAt": "2026-11-27T01:57:15Z",
  "trackedFrom": "2026-09-12",
  "streams": [
   {
@@ -614,13 +614,12 @@
   {
    "d": "2026-11-26",
    "start": "21:24",
-   "dur": null,
+   "dur": 273,
    "title": "Happy thanksgiving + viewer try not to laugh",
    "tags": [
     "Just Chatting"
    ],
    "raw": "🦃HAPPY THANKSGIVING🦃VIEWER TRY NOT TO LAUGH🦃LOOKING AT EATS 🦃TIERLISTS🦃LETS GOOOO🦃",
-   "seen": "2026-11-27T01:27:02Z",
    "peak": 160,
    "vod": "https://www.twitch.tv/videos/2941681581"
   },
