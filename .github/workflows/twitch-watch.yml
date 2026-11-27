@@ -24,7 +24,8 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           deadline=$(( $(date +%s) + 330*60 ))
           while :; do
-            git pull --rebase -q origin main
+            # a brief GitHub network hiccup shouldn't fail the run: retry, then carry on with what we have
+            for i in 1 2 3; do git pull --rebase -q origin main && break; echo "git pull failed, retrying"; sleep 5; done
             node tools/twitch-watch.mjs
             IFS=$'\t' read -r live changed msg < <(node -e "const s=JSON.parse(require('fs').readFileSync(process.env.WATCH_STATE,'utf8'));console.log([s.live,s.changed,s.msg||''].join('\t'))")
             if [ "$changed" = "true" ]; then
