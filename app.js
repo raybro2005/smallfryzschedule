@@ -57,7 +57,7 @@ function cleanEvent(o){
   if(!o||typeof o!=="object"||!validDate(o.from)||!validDate(o.to)||o.to<o.from)return null;
   if((Date.parse(o.to)-Date.parse(o.from))/864e5>120)return null;
   const title=str(o.title,100); if(!title)return null;
-  return {from:o.from,to:o.to,title,note:str(o.note,300)};
+  return {from:o.from,to:o.to,title,note:str(o.note,300),off:o.off===true};
 }
 function cleanMeta(o){
   if(!o||typeof o!=="object")return null;
@@ -201,7 +201,7 @@ function renderDetail(){
   });
   evs.forEach(e=>{
     const range=e.from===e.to?"One day":`${fmtShort(e.from)} – ${fmtShort(e.to)}`;
-    h+=`<div class="entry"><span class="chip event">Event · ${range}</span><h3>${esc(e.title)}</h3>${e.note?`<p style="margin:0;font-size:.92rem">${esc(e.note)}</p>`:""}</div>`;
+    h+=`<div class="entry"><span class="chip event">${e.off?"Day off":"Event"} · ${range}</span><h3>${esc(e.title)}</h3>${e.note?`<p style="margin:0;font-size:.92rem">${esc(e.note)}</p>`:""}</div>`;
   });
   const vod=list.find(s=>s.vod&&!s.planned&&s.dur!==null); // a finished stream links to its VOD instead of the channel
   h+=vod?`<a class="watch" href="${esc(vod.vod)}" target="_blank" rel="noopener noreferrer">Watch the VOD →</a>`

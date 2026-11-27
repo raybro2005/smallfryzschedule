@@ -64,7 +64,19 @@ Marked days are **events**. On the calendar they show as a purple band across th
 - These are calendar dates, not UTC times, so no time conversion is needed.
 - Same comma rules as streams.
 
-An event only marks the days. It doesn't remove streams, so if he's taking a day off and his Twitch schedule still lists a stream, say so in the note.
+For **days off**, add `"off": true` to the event:
+
+```json
+  {
+   "from": "2026-11-27",
+   "to": "2026-11-28",
+   "title": "Days off: birthday",
+   "note": "No streams for two days.",
+   "off": true
+  },
+```
+
+The site then labels it "Day off", and the checker hides his Twitch-schedule streams on those days. Without `"off": true`, an event only marks the days and doesn't hide anything.
 
 ## How a planned day turns into the real stream
 

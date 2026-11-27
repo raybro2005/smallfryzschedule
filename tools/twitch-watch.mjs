@@ -138,6 +138,11 @@ if (segs) {
   const realDays = new Set(j.streams.filter(x => !x.planned).map(x => x.d));
   // days Fryz gave us directly: these win over his Twitch schedule
   const fryzDays = new Set(j.streams.filter(x => x.planned && x.source === "fryz").map(x => x.d));
+  // days marked off by hand (an event with "off": true): his Twitch schedule is ignored for those days
+  const offDays = new Set();
+  for (const e of j.events || []) if (e.off === true && e.from && e.to)
+    for (let t = Date.parse(e.from + "T00:00:00Z"); t <= Date.parse(e.to + "T00:00:00Z") && offDays.size < 400; t += 864e5) offDays.add(ymd(new Date(t)));
+  for (const d of offDays) wanted.delete(d);
   const before = JSON.stringify(j.streams);
   j.streams = j.streams.filter(x => {
     if (!x.planned) return true;
